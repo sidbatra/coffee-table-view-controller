@@ -28,6 +28,7 @@
 		BB0CA0C216A22DC400D4F38C /* UsersViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0CA0BD16A22DC300D4F38C /* UsersViewDataSource.m */; };
 		BB0CA0C616A2592B00D4F38C /* refresh-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0CA0C416A2592B00D4F38C /* refresh-gray.png */; };
 		BB0CA0C716A2592B00D4F38C /* refresh-gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0CA0C516A2592B00D4F38C /* refresh-gray@2x.png */; };
+		BB0CA0D316A379FE00D4F38C /* CRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0CA0D216A379FE00D4F38C /* CRefreshHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,10 @@
 		BB0CA0C416A2592B00D4F38C /* refresh-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh-gray.png"; sourceTree = "<group>"; };
 		BB0CA0C516A2592B00D4F38C /* refresh-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh-gray@2x.png"; sourceTree = "<group>"; };
 		BB0CA0C816A3659E00D4F38C /* CLoadingViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLoadingViewProtocol.h; sourceTree = "<group>"; };
+		BB0CA0D116A379FE00D4F38C /* CRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRefreshHeaderView.h; sourceTree = "<group>"; };
+		BB0CA0D216A379FE00D4F38C /* CRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRefreshHeaderView.m; sourceTree = "<group>"; };
+		BB0CA0D516A37A1600D4F38C /* CRefreshHeaderViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRefreshHeaderViewProtocol.h; sourceTree = "<group>"; };
+		BB0CA0D616A37F2900D4F38C /* CRefreshHeaderViewDelegateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRefreshHeaderViewDelegateProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +163,10 @@
 				BB0CA0C816A3659E00D4F38C /* CLoadingViewProtocol.h */,
 				BB0CA0A416A22CA200D4F38C /* CLoadingView.h */,
 				BB0CA0A516A22CA200D4F38C /* CLoadingView.m */,
+				BB0CA0D516A37A1600D4F38C /* CRefreshHeaderViewProtocol.h */,
+				BB0CA0D616A37F2900D4F38C /* CRefreshHeaderViewDelegateProtocol.h */,
+				BB0CA0D116A379FE00D4F38C /* CRefreshHeaderView.h */,
+				BB0CA0D216A379FE00D4F38C /* CRefreshHeaderView.m */,
 				BB0CA0A616A22CA200D4F38C /* CModelPresenterProtocol.h */,
 				BB0CA0A716A22CA200D4F38C /* CTableViewController.h */,
 				BB0CA0A816A22CA200D4F38C /* CTableViewController.m */,
@@ -272,6 +281,7 @@
 				BB0CA0C016A22DC400D4F38C /* UserPresenter.m in Sources */,
 				BB0CA0C116A22DC400D4F38C /* UsersViewController.m in Sources */,
 				BB0CA0C216A22DC400D4F38C /* UsersViewDataSource.m in Sources */,
+				BB0CA0D316A379FE00D4F38C /* CRefreshHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +391,7 @@
 				BB0CA09F16A22C9000D4F38C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

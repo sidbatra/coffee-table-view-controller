@@ -43,8 +43,6 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     
     BOOL                        _isPullToRefreshActive;
     BOOL                        _disablePullToRefresh;
-    
-	EGORefreshTableHeaderView   *_refreshHeaderView;
 }
 
 /**
@@ -52,11 +50,6 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
  * for each model class.
  */
 @property (nonatomic,strong) NSMutableDictionary *modelPresenters;
-
-/**
- * View for pull to refresh added above the table view
- */
-@property (nonatomic,strong) EGORefreshTableHeaderView *refreshHeaderView;
 
 @property (nonatomic,assign) BOOL isPullToRefreshActive;
 
@@ -129,10 +122,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     
     
     if(!self.refreshHeaderView && !self.disablePullToRefresh) {
-        self.refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 
-                                                                                              0.0f - self.tableView.bounds.size.height,
-                                                                                              self.view.frame.size.width,
-                                                                                              self.tableView.bounds.size.height)];
+        self.refreshHeaderView = [self tableRefreshHeaderView];
         self.refreshHeaderView.delegate = self;
     }
     
@@ -231,6 +221,17 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     frame.origin.y -= delta;
     frame.size.height += delta;
     self.errorView.frame = frame;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (UIView<CRefreshHeaderViewProtocol>*)tableRefreshHeaderView {
+    UIView<CRefreshHeaderViewProtocol> *refreshHeaderView = [[CRefreshHeaderView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                                  0.0f - self.tableView.bounds.size.height,
+                                                                                  self.view.frame.size.width,
+                                                                                  self.tableView.bounds.size.height)];
+    refreshHeaderView.delegate = self;
+    
+    return refreshHeaderView;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -397,16 +398,12 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 //----------------------------------------------------------------------------------------------------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{		
-	[self.refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+	[self.refreshHeaderView scrollViewDidScroll:scrollView];
 }
 
 //----------------------------------------------------------------------------------------------------
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	[self.refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-//----------------------------------------------------------------------------------------------------
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	[self.refreshHeaderView scrollViewDidEndDragging:scrollView];
 }
  
 
@@ -423,7 +420,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     
     [self.tableView reloadData];
 
-    [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    [self.refreshHeaderView scrollViewDataSourceDidFinishedLoading:self.tableView];
     self.isPullToRefreshActive = NO;
 }
 
@@ -444,7 +441,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     [self.tableView reloadData];
     
     self.isPullToRefreshActive = NO;
-    [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    [self.refreshHeaderView scrollViewDataSourceDidFinishedLoading:self.tableView];
 }
  
 //----------------------------------------------------------------------------------------------------
@@ -514,21 +511,21 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 #pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate 
+#pragma mark CRefreshHeaderViewDelegate
 
 //----------------------------------------------------------------------------------------------------
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
+- (void)refreshHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
     self.isPullToRefreshActive = YES;
     [self.tableViewDataSource refreshInitiated];
 }
 
 //----------------------------------------------------------------------------------------------------
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
+- (BOOL)refreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
 	return self.isPullToRefreshActive;
 }
 
 //----------------------------------------------------------------------------------------------------
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view {
+- (NSDate*)refreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view {
 	return nil;
 }
 

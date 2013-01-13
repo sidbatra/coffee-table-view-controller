@@ -32,7 +32,7 @@
 
 #import "CLoadingViewProtocol.h"
 
-#import "EGORefreshTableHeaderView.h"
+#import "CRefreshHeaderView.h"
 
 
 
@@ -40,10 +40,11 @@ extern NSInteger const kModelPresenterDefaultStyle;
 
 
 
-@interface CTableViewController : UITableViewController<CTableViewDataSourceDelegate,EGORefreshTableHeaderDelegate,CErrorViewDelegate> {
+@interface CTableViewController : UITableViewController<CTableViewDataSourceDelegate,CErrorViewDelegate,CRefreshHeaderViewDelegateProtocol> {
     
     CTableViewDataSource *_tableViewDataSource;
     
+    UIView<CRefreshHeaderViewProtocol> *_refreshHeaderView;
     UIView<CLoadingViewProtocol> *_loadingView;
     UIView<CErrorViewProtocol> *_errorView;
 }
@@ -52,6 +53,12 @@ extern NSInteger const kModelPresenterDefaultStyle;
  * Overrideable datasource for populating the table view.
  */
 @property (nonatomic,strong) CTableViewDataSource *tableViewDataSource;
+
+
+/**
+ * View displayed for pull to refresh. Overrideable using the tableRefreshHeaderView method.
+ */
+@property (nonatomic,strong) UIView<CRefreshHeaderViewProtocol> *refreshHeaderView;
 
 /**
  * View displayed when table view goes into loading state. Overrideable using
@@ -104,6 +111,12 @@ extern NSInteger const kModelPresenterDefaultStyle;
  */
 - (void)provideResourceToVisibleCells:(id)updatedObject
                            updatedKey:(NSString*)updatedKey;
+
+/**
+ * Template method to be overidden for a custom pull to referesh view which must conform to
+ * the CRefreshHeaderViewProtocol.
+ */
+- (UIView<CRefreshHeaderViewProtocol>*)tableRefreshHeaderView;
 
 /**
  * Template method to be overidden for a custom loading view which must conform to
