@@ -10,6 +10,10 @@
 
 #import "CModelPresenterProtocol.h"
 
+
+static NSInteger const kUserPresenterStyleWithByline = 1;
+
+
 @interface UserPresenter : NSObject<CModelPresenterProtocol>
 
 @end

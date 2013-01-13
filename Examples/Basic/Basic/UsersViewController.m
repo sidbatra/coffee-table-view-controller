@@ -47,7 +47,7 @@
 
         
         [self addModelPresenterForClass:[User class]
-                              withStyle:0
+                              withStyle:kUserPresenterStyleWithByline
                           withPresenter:[UserPresenter class]];
         
         /*

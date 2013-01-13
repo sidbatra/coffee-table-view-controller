@@ -28,6 +28,9 @@
 #import "CLoadingView.h"
 
 
+NSInteger const kModelPresenterDefaultStyle = 0;
+
+
 static NSString* const kModelKeyPresenter          = @"ModelKeyPresenter";
 static NSString* const kModelKeyPresenterStyle     = @"ModelKeyPresenterStyle";
 static NSString* const kModelKeyIdentifier         = @"ModelKeyIdentifier";

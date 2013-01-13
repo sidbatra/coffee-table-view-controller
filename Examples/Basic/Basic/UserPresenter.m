@@ -39,15 +39,13 @@
     
     //[cell setUserImage:user.squareImage];
     
-    [cell setUserName:user.name];
-    /*
-    if (style == kDefaultModelPresenter)
-        [cell setUserName:user.fullName];
+
+    if(style == kUserPresenterStyleWithByline)
+        [cell setUserName:user.name
+               andMessage:user.byline];
     else
-        [cell setUserName:user.fullName
-               andMessage:user.message];
-     */
-     
+        [cell setUserName:user.name];
+    
     return cell;
 }
 

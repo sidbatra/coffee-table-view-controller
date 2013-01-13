@@ -36,6 +36,10 @@
 
 
 
+extern NSInteger const kModelPresenterDefaultStyle;
+
+
+
 @interface CTableViewController : UITableViewController<CTableViewDataSourceDelegate,EGORefreshTableHeaderDelegate,CErrorViewDelegate> {
     
     CTableViewDataSource *_tableViewDataSource;
