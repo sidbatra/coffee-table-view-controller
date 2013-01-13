@@ -34,9 +34,7 @@ static NSString* const kModelKeyIdentifier         = @"ModelKeyIdentifier";
 static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 
-/**
- * Private method and property declarations
- */
+
 @interface CTableViewController() {
     NSMutableDictionary         *_modelPresenters;
     
@@ -119,7 +117,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 	self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
 
     
-    self.tableViewDataSource.delegate   = self;
+    self.tableViewDataSource.delegate = self;
     
     
     if(!self.refreshHeaderView && !_disablePullToRefresh) {
@@ -231,7 +229,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 }
 
 //----------------------------------------------------------------------------------------------------
-- (UIView*)tableLoadingView {
+- (UIView<CLoadingViewProtocol>*)tableLoadingView {
     CGRect frame = self.view.frame;
     return [[CLoadingView alloc] initWithFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
 }
@@ -250,7 +248,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 - (void)forceRefresh {
     [self.errorView hide];
     [self scrollToTop];
-    self.loadingView.hidden = NO;
+    [self.loadingView show];
     
     [self disableScrolling];
     
@@ -415,13 +413,13 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 //----------------------------------------------------------------------------------------------------
 - (void)reloadTableView {
     [self enableScrolling];
-    self.loadingView.hidden  = YES;
+    [self.loadingView hide];
     [self.errorView hide];
     
     [self.tableView reloadData];
 
     [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    _isPullToRefreshActive          = NO;    
+    _isPullToRefreshActive = NO;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -433,7 +431,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     
     [self scrollToTop];
     
-    self.loadingView.hidden = YES;
+    [self.loadingView hide];
     
     [self disableScrolling];
     
@@ -537,7 +535,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 //----------------------------------------------------------------------------------------------------
 - (void)errorViewTouched {
-    self.loadingView.hidden = NO;
+    [self.loadingView show];
     [self.errorView hide];
     [self.tableViewDataSource refreshInitiated];
 }

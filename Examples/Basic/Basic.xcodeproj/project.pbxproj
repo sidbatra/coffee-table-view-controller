@@ -68,6 +68,7 @@
 		BB0CA0BD16A22DC300D4F38C /* UsersViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersViewDataSource.m; sourceTree = "<group>"; };
 		BB0CA0C416A2592B00D4F38C /* refresh-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh-gray.png"; sourceTree = "<group>"; };
 		BB0CA0C516A2592B00D4F38C /* refresh-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh-gray@2x.png"; sourceTree = "<group>"; };
+		BB0CA0C816A3659E00D4F38C /* CLoadingViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLoadingViewProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +155,7 @@
 				BB0CA0A316A22CA200D4F38C /* CErrorViewProtocol.h */,
 				BB0CA0A116A22CA200D4F38C /* CErrorView.h */,
 				BB0CA0A216A22CA200D4F38C /* CErrorView.m */,
+				BB0CA0C816A3659E00D4F38C /* CLoadingViewProtocol.h */,
 				BB0CA0A416A22CA200D4F38C /* CLoadingView.h */,
 				BB0CA0A516A22CA200D4F38C /* CLoadingView.m */,
 				BB0CA0A616A22CA200D4F38C /* CModelPresenterProtocol.h */,

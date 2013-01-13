@@ -30,18 +30,17 @@
 #import "CErrorView.h"
 #import "CErrorViewProtocol.h"
 
+#import "CLoadingViewProtocol.h"
+
 #import "EGORefreshTableHeaderView.h"
 
 
-/**
- * Customized version of UITableViewController which forms the base 
- * for every table view controller in the app
- */
+
 @interface CTableViewController : UITableViewController<CTableViewDataSourceDelegate,EGORefreshTableHeaderDelegate,CErrorViewDelegate> {
     
     CTableViewDataSource       *_tableViewDataSource;
     
-    UIView                      *_loadingView;
+    UIView<CLoadingViewProtocol> *_loadingView;
     UIView<CErrorViewProtocol> *_errorView;
 }
 
@@ -53,7 +52,7 @@
 /**
  * View displayed when results are being fetched from the server
  */
-@property (nonatomic,strong) UIView *loadingView;
+@property (nonatomic,strong) UIView<CLoadingViewProtocol> *loadingView;
 
 /**
  * View displayed when an error occurs
@@ -105,7 +104,7 @@
  * Template method which can be overriden for custom laoding views which is a UIView 
  * displayed while the data is being loaded
  */
-- (UIView*)tableLoadingView;
+- (UIView<CLoadingViewProtocol>*)tableLoadingView;
 
 /**
  * Template method which can be overriden for custom error views which is a UIView 

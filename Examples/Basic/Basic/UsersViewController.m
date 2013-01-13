@@ -76,7 +76,7 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1.0];
     
-    [(UsersViewDataSource*)self.tableViewDataSource loadUsers];
+    [self.tableViewDataSource performSelector:@selector(loadUsers) withObject:nil afterDelay:1.5];
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  CLoadingView.h
+//  CLoadingViewProtocol.h
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,13 +23,16 @@
 //  THE SOFTWARE.
 //
 
+#import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
+/**
+ * Custom loading views for CTableViewControllers must conform to this protocol.
+ */
+@protocol CLoadingViewProtocol
 
-#import "CLoadingViewProtocol.h"
+@required
 
-
-@interface CLoadingView : UIView<CLoadingViewProtocol> {
-}
+- (void)hide;
+- (void)show;
 
 @end
