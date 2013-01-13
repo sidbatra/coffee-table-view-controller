@@ -29,19 +29,21 @@
 @protocol CTableViewDataSourceDelegate;
 
 
+
 /**
- * Data source for the CTableViewController implementation.
- * Its child classes are responsible for storing and procuring
- * data for table view across the application.
+ * Inherit and use your own table view data source to power a table view controller.
+ * Methods that don't contain a section index refer to the default section index: 0.
  */
 @interface CTableViewDataSource : NSObject {
-    NSMutableArray  *_objects;
+    NSMutableArray *_objects;
     
     __weak id<CTableViewDataSourceDelegate,NSObject> _delegate;
 }
 
+
 /**
- * Holds objects that correspond to the rows of a table view controller
+ * Two dimensional array. First dimension contains an NSMutableArray representing
+ * each section. Second dimension holds objects for each section.
  */
 @property (nonatomic,strong) NSMutableArray *objects;
 
@@ -51,102 +53,112 @@
 @property (nonatomic,weak) id<CTableViewDataSourceDelegate,NSObject> delegate;
 
 
+@property (nonatomic,readonly) NSInteger totalSections;
 
-/**
- * Destroy and release all objects
- */
-- (void)clean;
+@property (nonatomic,readonly) NSInteger totalObjects;
 
-/**
- * Get the total number of sections 
- */
-- (NSInteger)totalSections;
 
-/**
- * Fetch the total number of objects for the given section
- */
+
+
+- (id)initWithNumberOfSections:(NSInteger)numberOfSections;
+
+- (id)init;
+
+
+
+
 - (NSInteger)totalObjectsForSection:(NSInteger)section;
 
-/**
- * Fetch the object at the given index
- */
-- (id)objectAtIndex:(NSInteger)index 
-         forSection:(NSInteger)section;
+- (NSMutableArray*)sectionAtIndex:(NSInteger)sectionIndex;
 
-/**
- * Returns the index in the objects array for the given object. NSNotFound if not found.
- */
+- (id)objectAtIndex:(NSInteger)index
+         forSection:(NSInteger)sectionIndex;
+
+- (id)objectAtIndex:(NSInteger)index;
+
 - (NSInteger)indexForObject:(id)object;
 
 /**
- * Fired when a user generated or automated refresh is initiated
+ * Returns NSNotFound if not found.
  */
-- (void)refreshInitiated;
+- (NSInteger)indexForObject:(id)object
+                  inSection:(NSInteger)sectionIndex;
 
-/**
- * Add the given object into the given index
- * and instruct table view to display it with animation
- */
+
+
+
+
+- (void)addObjects:(NSMutableArray*)newObjects
+         toSection:(NSInteger)sectionIndex;
+
+- (void)addObjects:(NSMutableArray*)newObjects;
+
+- (void)addObject:(id)newObject
+        toSection:(NSInteger)sectionIndex;
+
+- (void)addObject:(id)newObject;
+
+
+
+
+- (void)addObject:(id)object
+          atIndex:(NSInteger)index
+       forSection:(NSInteger)sectionIndex
+    withAnimation:(UITableViewRowAnimation)animation;
+
 - (void)addObject:(id)object
           atIndex:(NSInteger)index
     withAnimation:(UITableViewRowAnimation)animation;
 
-/**
- * Add the given object at the end of the array
- */
+- (void)addObjectAtEnd:(id)object
+            forSection:(NSInteger)sectionIndex
+         withAnimation:(UITableViewRowAnimation)animation;
+
 - (void)addObjectAtEnd:(id)object
          withAnimation:(UITableViewRowAnimation)animation;
 
-/**
- * Remove the given object from the array with specified 
- * animation
- */
+- (void)removeObject:(id)object
+          forSection:(NSInteger)sectionIndex
+       withAnimation:(UITableViewRowAnimation)animation;
+
 - (void)removeObject:(id)object 
        withAnimation:(UITableViewRowAnimation)animation;
+
+
+
+/**
+  * Template method to be overriden. Override and write your full refresh
+  * logic here. Example: After a user does pull to refresh or an automated
+  * refresh is started.
+  */
+- (void)refreshInitiated;
 
 @end
 
 
 
 /**
- * CTableViewDataSource delegate definition. It's used to communicate
- * with the table view controller for which its a data source
+ * Enables the datasource to communicate with the table view controller.
  */
 @protocol CTableViewDataSourceDelegate
 
-/**
- * Request a full reload
- */
+
 - (void)reloadTableView;
 
-/**
- * Inserts a new row into the table view
- * with specified animation
- */
 - (void)insertRowAtIndex:(NSInteger)index
+              forSection:(NSInteger)sectionIndex
            withAnimation:(UITableViewRowAnimation)animation;
 
-/**
- * Removes an existing row from the table view
- * with specified animation
- */
-- (void)removeRowAtIndex:(NSInteger)index 
+- (void)removeRowAtIndex:(NSInteger)index
+              forSection:(NSInteger)sectionIndex
            withAnimation:(UITableViewRowAnimation)animation;
 
-/**
- * Reload the cell at the given index
- */
-- (void)reloadRowAtIndex:(NSInteger)index;
+- (void)reloadRowAtIndex:(NSInteger)index
+              forSection:(NSInteger)sectionIndex;
 
-/**
- * Scroll the table view to a given index
- */
-- (void)scrollToRowAtIndex:(NSInteger)index;
+- (void)scrollToRowAtIndex:(NSInteger)index
+                forSection:(NSInteger)sectionIndex;
 
-/**
- * Display an error message with an option for display a retry 
- * / refresh UI.
- */
 - (void)displayError:(NSString *)message 
        withRefreshUI:(BOOL)showRefreshUI;
 

@@ -25,16 +25,15 @@
 
 #import "CTableViewDataSource.h"
 
-static NSInteger const kDefaultSections = 1;
+static NSInteger const kDefaultTotalSections = 1;
 
 
-/**
- * Select private methods and properties
- */
+
 @interface CTableViewDataSource()
 
 /**
- * Load the next page of objects
+ * Template method called to load the next page of objects. Override in your implmentation.
+ * Launch this method via a notification to the default center.... TODO
  */
 - (void)paginate;
 
@@ -53,30 +52,32 @@ static NSInteger const kDefaultSections = 1;
 
 //----------------------------------------------------------------------------------------------------
 - (id)init {
+    return [self initWithNumberOfSections:kDefaultTotalSections];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (id)initWithNumberOfSections:(NSInteger)numberOfSections {
     self = [super init];
     
     if(self) {
-        self.objects = [NSMutableArray array];
+        self.objects = [NSMutableArray arrayWithCapacity:numberOfSections];
+        
+        for(NSInteger i=0 ; i<numberOfSections ; i++)
+            [self.objects addObject:[NSMutableArray array]];
         
         
         /*[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(paginationCellReached:) 
-													 name:kNPaginationCellReached
-												   object:nil];*/
+         selector:@selector(paginationCellReached:)
+         name:kNPaginationCellReached
+         object:nil];*/
     }
     
     return self;
 }
 
 //----------------------------------------------------------------------------------------------------
-- (void)clean {
-}
-
-//----------------------------------------------------------------------------------------------------
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    [self clean];
 }
 
 
@@ -88,24 +89,65 @@ static NSInteger const kDefaultSections = 1;
 
 //----------------------------------------------------------------------------------------------------
 - (NSInteger)totalSections {
-    return kDefaultSections;
+    return self.objects.count;
 }
 
 //----------------------------------------------------------------------------------------------------
-- (NSInteger)totalObjectsForSection:(NSInteger)section {
-    return [self.objects count];
+- (NSInteger)totalObjects {
+    NSInteger count = 0;
+    
+    for(NSInteger i=0 ; i<self.totalSections ; i++)
+        count += [self sectionAtIndex:i].count;
+    
+    return count;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (NSInteger)totalObjectsForSection:(NSInteger)sectionIndex {
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    return section ? section.count : 0;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (NSMutableArray*)sectionAtIndex:(NSInteger)sectionIndex {
+    return sectionIndex < self.totalSections ? [self.objects objectAtIndex:sectionIndex] : nil;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (id)objectAtIndex:(NSInteger)index {
+    return [self objectAtIndex:index
+                    forSection:kDefaultTotalSections-1];
 }
 
 //----------------------------------------------------------------------------------------------------
 - (id)objectAtIndex:(NSInteger)index 
-         forSection:(NSInteger)section {
+         forSection:(NSInteger)sectionIndex {
     
-    return index < [self.objects count] ? [self.objects objectAtIndex:index] : nil;
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    if(!section)
+        return nil;
+        
+    return index < section.count ? [section objectAtIndex:index] : nil;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (NSInteger)indexForObject:(id)object
+                  inSection:(NSInteger)sectionIndex {
+    
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    if(!section)
+        return 0;
+    
+    return [section indexOfObject:object];
 }
 
 //----------------------------------------------------------------------------------------------------
 - (NSInteger)indexForObject:(id)object {
-    return [self.objects indexOfObject:object];
+    return [self indexForObject:object
+                      inSection:kDefaultTotalSections-1];
 }
 
 
@@ -115,40 +157,130 @@ static NSInteger const kDefaultSections = 1;
 #pragma mark Modification
 
 //----------------------------------------------------------------------------------------------------
-- (void)addObject:(id)object 
+- (void)addObjects:(NSMutableArray*)newObjects
+         toSection:(NSInteger)sectionIndex {
+    
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    if(!section)
+        return;
+    
+    [section addObjectsFromArray:newObjects];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)addObjects:(NSMutableArray*)newObjects {
+    [self addObjects:newObjects
+           toSection:kDefaultTotalSections-1];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)addObject:(id)newObject
+        toSection:(NSInteger)sectionIndex {
+    
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    if(!section)
+        return;
+    
+    [section addObject:newObject];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)addObject:(id)newObject {
+    [self addObject:newObject toSection:kDefaultTotalSections-1];
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+#pragma mark -
+#pragma mark Modification with Animation
+
+//----------------------------------------------------------------------------------------------------
+- (void)addObject:(id)object
           atIndex:(NSInteger)index
     withAnimation:(UITableViewRowAnimation)animation {
     
-    [self.objects insertObject:object
-                       atIndex:index];
+    [self addObject:object
+            atIndex:index
+         forSection:kDefaultTotalSections-1
+      withAnimation:animation];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)addObject:(id)object 
+          atIndex:(NSInteger)index
+       forSection:(NSInteger)sectionIndex
+    withAnimation:(UITableViewRowAnimation)animation {
     
-    [self.delegate insertRowAtIndex:index 
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    if(!section)
+        return;
+    
+    [section insertObject:object
+                  atIndex:index];
+    
+    [self.delegate insertRowAtIndex:index
+                         forSection:sectionIndex
                       withAnimation:animation];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)addObjectAtEnd:(id)object
+            forSection:(NSInteger)sectionIndex
+         withAnimation:(UITableViewRowAnimation)animation {
+    
+    [self addObject:object
+            atIndex:[self.objects count]
+         forSection:sectionIndex
+      withAnimation:animation];
 }
 
 //----------------------------------------------------------------------------------------------------
 - (void)addObjectAtEnd:(id)object
          withAnimation:(UITableViewRowAnimation)animation {
     
-    [self addObject:object
-            atIndex:[self.objects count]
-      withAnimation:animation];
+    [self addObjectAtEnd:object
+              forSection:kDefaultTotalSections-1
+           withAnimation:animation];
 }
 
 //----------------------------------------------------------------------------------------------------
-- (void)removeObject:(id)object 
+- (void)removeObject:(id)object
+          forSection:(NSInteger)sectionIndex
        withAnimation:(UITableViewRowAnimation)animation {
 
-    NSInteger index = [self indexForObject:object];
+    NSInteger index = [self indexForObject:object
+                                 inSection:sectionIndex];
     
     if(index == NSNotFound)
         return;
 
     
-    [self.objects removeObjectAtIndex:index];
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
     
-    [self.delegate removeRowAtIndex:index 
+    if(!section)
+        return;
+    
+    [section removeObjectAtIndex:index];
+    
+    
+    [self.delegate removeRowAtIndex:index
+                         forSection:sectionIndex
                       withAnimation:animation];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)removeObject:(id)object
+       withAnimation:(UITableViewRowAnimation)animation {
+    
+    [self removeObject:object
+            forSection:kDefaultTotalSections-1
+         withAnimation:animation];
 }
 
 

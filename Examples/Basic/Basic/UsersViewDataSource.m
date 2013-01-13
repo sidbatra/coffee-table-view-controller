@@ -107,7 +107,7 @@
                                      imageURL:@"http://graph.facebook.com/513303014/picture?type=square"]];
     
     
-    self.objects = users;
+    [self addObjects:users];
     
     [self.delegate reloadTableView];    
 }

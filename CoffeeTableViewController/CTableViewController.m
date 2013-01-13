@@ -449,10 +449,11 @@ static NSString* const kMsgNetworkError             = @"No connection; pull to r
  
 //----------------------------------------------------------------------------------------------------
 - (void)insertRowAtIndex:(NSInteger)index
+              forSection:(NSInteger)sectionIndex
            withAnimation:(UITableViewRowAnimation)animation {
     
     NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:index
-                                                     inSection:0];
+                                                     inSection:sectionIndex];
     NSArray *indexPaths		= [NSArray arrayWithObjects:indexPath,nil];
     
     [self.tableView insertRowsAtIndexPaths:indexPaths
@@ -460,11 +461,12 @@ static NSString* const kMsgNetworkError             = @"No connection; pull to r
 }
 
 //----------------------------------------------------------------------------------------------------
-- (void)removeRowAtIndex:(NSInteger)index 
+- (void)removeRowAtIndex:(NSInteger)index
+              forSection:(NSInteger)sectionIndex
            withAnimation:(UITableViewRowAnimation)animation {
     
     NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:index
-                                                 inSection:0];
+                                                 inSection:sectionIndex];
     
     if(!indexPath)
         return;
@@ -477,10 +479,11 @@ static NSString* const kMsgNetworkError             = @"No connection; pull to r
 }
 
 //----------------------------------------------------------------------------------------------------
-- (void)reloadRowAtIndex:(NSInteger)index {
+- (void)reloadRowAtIndex:(NSInteger)index
+              forSection:(NSInteger)sectionIndex {
     
     NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:index
-                                                 inSection:0];
+                                                 inSection:sectionIndex];
 
     if(!indexPath || index >= [self.tableViewDataSource.objects count])
         return;
@@ -493,10 +496,11 @@ static NSString* const kMsgNetworkError             = @"No connection; pull to r
 }
 
 //----------------------------------------------------------------------------------------------------
-- (void)scrollToRowAtIndex:(NSInteger)index {
+- (void)scrollToRowAtIndex:(NSInteger)index
+                forSection:(NSInteger)sectionIndex {
     
     NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:index
-                                                 inSection:0];
+                                                 inSection:sectionIndex];
     
     if(!indexPath || index >= [self.tableViewDataSource.objects count])
         return;
