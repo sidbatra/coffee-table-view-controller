@@ -38,35 +38,37 @@
 
 @interface CTableViewController : UITableViewController<CTableViewDataSourceDelegate,EGORefreshTableHeaderDelegate,CErrorViewDelegate> {
     
-    CTableViewDataSource       *_tableViewDataSource;
+    CTableViewDataSource *_tableViewDataSource;
     
     UIView<CLoadingViewProtocol> *_loadingView;
     UIView<CErrorViewProtocol> *_errorView;
 }
 
 /**
- * Custom overrideable datasource object for populating the table view.
+ * Overrideable datasource for populating the table view.
  */
 @property (nonatomic,strong) CTableViewDataSource *tableViewDataSource;
 
 /**
- * View displayed when results are being fetched from the server
+ * View displayed when table view goes into loading state. Overrideable using
+ * the tableLoadingView method.
  */
 @property (nonatomic,strong) UIView<CLoadingViewProtocol> *loadingView;
 
 /**
- * View displayed when an error occurs
+ * View displayed when table view goes into error state. Overrideable using the
+ * tableErrorView method.
  */
 @property (nonatomic,strong) UIView<CErrorViewProtocol> *errorView;
 
 
 /**
- * Forces the data source to initiate a refresh
+ * Forces the table view data source to initiate a refresh.
  */
 - (void)forceRefresh;
 
 /**
- * Scroll the table view to the top
+ * Scroll the table view to the top.
  */
 - (void)scrollToTop;
 
@@ -76,44 +78,45 @@
 - (void)scrollToBottomWithAnimation:(BOOL)animated;
 
 /**
- * Method to disable pull to refresh for certain table views
+ * Disable and hide pull to refresh UI.
  */
-- (void)disablePullToRefresh;
+- (void)hidePullToRefresh;
 
 /**
- * Returns if the table view is in a normal state and is displaying cells
+ * Whether the table view is displaying a supporting error or loading view (NO) or the
+ * table view cells are being displayed (YES).
  */
 - (BOOL)isDisplayingCells;
 
 /**
- * Add a model presenter mapping.
+ * Create a mapping between a model class and it's presenter.
  */
 - (void)addModelPresenterForClass:(Class)class 
                         withStyle:(NSInteger)style
                     withPresenter:(Class)presenter;
 
 /**
- * Pass the newly available resource to all visible cells to check
- * for possible UI updates
+ * To update the UI of visible cells, pass the object class that is updated, along with a unique id
+ * and the attribute key which is modified.
  */
 - (void)provideResourceToVisibleCells:(Class)objectClass
                              objectID:(NSInteger)objectID
                             objectKey:(NSString*)objectKey;
 
 /**
- * Template method which can be overriden for custom laoding views which is a UIView 
- * displayed while the data is being loaded
+ * Template method to be overidden for a custom loading view which must conform to
+ * the CLoadingViewProtocol.
  */
 - (UIView<CLoadingViewProtocol>*)tableLoadingView;
 
 /**
- * Template method which can be overriden for custom error views which is a UIView 
- * displayed on error and follows the CErrorViewProtocol.
+ * Template method to be overidden for a custom error view which must conform to
+ * the CErrorViewProtocol.
  */
 - (UIView<CErrorViewProtocol>*)tableErrorView;
 
 /**
- * Adjust Y positioning of the supporting views.
+ * Adjust Y positioning of the supporting views - error or loading views.
  */
 - (void)adjustSupportingViewsY:(CGFloat)delta;
 

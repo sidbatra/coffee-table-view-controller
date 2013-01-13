@@ -46,7 +46,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 /**
  * Holds a mapping of the Presenter class, Presenter style and Identifier
- * for each 
+ * for each model class.
  */
 @property (nonatomic,strong) NSMutableDictionary *modelPresenters;
 
@@ -54,6 +54,10 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
  * View for pull to refresh added above the table view
  */
 @property (nonatomic,strong) EGORefreshTableHeaderView *refreshHeaderView;
+
+@property (nonatomic,assign) BOOL isPullToRefreshActive;
+
+@property (nonatomic,assign) BOOL disablePullToRefresh;
 
 
 /**
@@ -65,7 +69,6 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
  * Disable scrolling & bouncing for the table view
  */
 - (void)disableScrolling;
-
 
 /**
  * Return the model presenter NSDictionary for the given object's class
@@ -86,6 +89,8 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 @synthesize loadingView             = _loadingView;
 @synthesize errorView               = _errorView;
 @synthesize refreshHeaderView       = _refreshHeaderView;
+@synthesize isPullToRefreshActive   = _isPullToRefreshActive;
+@synthesize disablePullToRefresh    = _disablePullToRefresh;
 
  
 //----------------------------------------------------------------------------------------------------
@@ -120,7 +125,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     self.tableViewDataSource.delegate = self;
     
     
-    if(!self.refreshHeaderView && !_disablePullToRefresh) {
+    if(!self.refreshHeaderView && !self.disablePullToRefresh) {
         self.refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 
                                                                                               0.0f - self.tableView.bounds.size.height,
                                                                                               self.view.frame.size.width,
@@ -190,7 +195,6 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
                                      andObjectKey:objectKey];
     }
 }
-
 
 //----------------------------------------------------------------------------------------------------
 - (void)enableScrolling {
@@ -278,8 +282,8 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 }
 
 //----------------------------------------------------------------------------------------------------
-- (void)disablePullToRefresh {
-    _disablePullToRefresh = YES;
+- (void)hidePullToRefresh {
+    self.disablePullToRefresh = YES;
     
     [self.refreshHeaderView removeFromSuperview];
     self.refreshHeaderView = nil;
@@ -419,7 +423,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     [self.tableView reloadData];
 
     [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    _isPullToRefreshActive = NO;
+    self.isPullToRefreshActive = NO;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -438,7 +442,7 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     
     [self.tableView reloadData];
     
-    _isPullToRefreshActive = NO;
+    self.isPullToRefreshActive = NO;
     [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
  
@@ -513,13 +517,13 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 //----------------------------------------------------------------------------------------------------
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
-    _isPullToRefreshActive = YES;
+    self.isPullToRefreshActive = YES;
     [self.tableViewDataSource refreshInitiated];
 }
 
 //----------------------------------------------------------------------------------------------------
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
-	return _isPullToRefreshActive; 
+	return self.isPullToRefreshActive;
 }
 
 //----------------------------------------------------------------------------------------------------
