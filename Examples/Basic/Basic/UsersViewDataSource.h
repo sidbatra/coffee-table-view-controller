@@ -29,5 +29,6 @@
 @interface UsersViewDataSource : CTableViewDataSource
 
 - (void)loadUsers;
+- (void)loadDelayedUsers;
 
 @end

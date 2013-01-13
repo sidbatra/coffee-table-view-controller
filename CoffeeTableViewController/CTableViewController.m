@@ -166,9 +166,8 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 
 //----------------------------------------------------------------------------------------------------
-- (void)provideResourceToVisibleCells:(Class)objectClass
-                             objectID:(NSInteger)objectID
-                            objectKey:(NSString*)objectKey {
+- (void)provideResourceToVisibleCells:(id)updatedObject
+                           updatedKey:(NSString*)updatedKey {
     
     if(![self isViewLoaded])
         return;
@@ -186,13 +185,12 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
         NSInteger modelPresenterStyle = [(NSNumber*)[presenter objectForKey:kModelKeyPresenterStyle] integerValue];
         
         id cell = [self.tableView cellForRowAtIndexPath:indexPath];
-           
+        
         [modelPresenter updatePresentationForCell:cell
                                          ofObject:object
                             withPresentationStyle:modelPresenterStyle
-                                  withObjectClass:objectClass
-                                     withObjectID:objectID
-                                     andObjectKey:objectKey];
+                                withUpdatedObject:updatedObject
+                                    andUpdatedKey:updatedKey];
     }
 }
 

@@ -67,7 +67,7 @@
 		//label.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
 		//label.shadowOffset = CGSizeMake(0.0f, -1.0f);
 		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = NSTextAlignmentLeft;
+		label.textAlignment = NSTextAlignmentCenter;
 		[self addSubview:label];
 		_statusLabel=label;
 		[label release];

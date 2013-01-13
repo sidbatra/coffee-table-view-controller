@@ -96,12 +96,10 @@
                     withPresenter:(Class)presenter;
 
 /**
- * To update the UI of visible cells, pass the object class that is updated, along with a unique id
- * and the attribute key which is modified.
+ * To update the UI of visible cells, pass updated object along with an updated attribute key.
  */
-- (void)provideResourceToVisibleCells:(Class)objectClass
-                             objectID:(NSInteger)objectID
-                            objectKey:(NSString*)objectKey;
+- (void)provideResourceToVisibleCells:(id)updatedObject
+                           updatedKey:(NSString*)updatedKey;
 
 /**
  * Template method to be overidden for a custom loading view which must conform to

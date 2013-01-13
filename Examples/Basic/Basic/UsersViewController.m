@@ -72,11 +72,9 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
-    [self hidePullToRefresh];
-    
     self.tableView.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1.0];
     
-    [self.tableViewDataSource performSelector:@selector(loadUsers) withObject:nil afterDelay:1.5];
+    [(UsersViewDataSource*)self.tableViewDataSource loadDelayedUsers];
 }
 
 @end
