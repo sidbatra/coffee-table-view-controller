@@ -121,10 +121,8 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     self.tableViewDataSource.delegate = self;
     
     
-    if(!self.refreshHeaderView && !self.disablePullToRefresh) {
+    if(!self.refreshHeaderView && !self.disablePullToRefresh)
         self.refreshHeaderView = [self tableRefreshHeaderView];
-        self.refreshHeaderView.delegate = self;
-    }
     
     [self.tableView addSubview:self.refreshHeaderView];
     
