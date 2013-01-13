@@ -25,13 +25,10 @@
 
 #import "CLoadingView.h"
 
-//#import "CDevice.h"
 
-static NSInteger const kSpinnerSize     = 20;
+static NSInteger const kSpinnerSize = 20;
 
-/**
- * Private method and property declarations
- */
+
 @interface CLoadingView()
 
 - (void)createSpinner;
@@ -63,9 +60,9 @@ static NSInteger const kSpinnerSize     = 20;
 //----------------------------------------------------------------------------------------------------
 - (void)createSpinner {
 
-    UIActivityIndicatorView *spinner	= [[UIActivityIndicatorView alloc]
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]
                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	//spinner.frame	= CGRectMake(113,([CDevice sharedCDevice].screenHeightMinusStatusBar - kSpinnerSize) / 2 - [CDevice sharedCDevice].navBarHeight - 6,kSpinnerSize,kSpinnerSize);
+	spinner.frame = CGRectMake(113,(self.frame.size.height - kSpinnerSize) / 2 - 6,kSpinnerSize,kSpinnerSize);
     
     [spinner startAnimating];
 	
@@ -75,9 +72,8 @@ static NSInteger const kSpinnerSize     = 20;
 //----------------------------------------------------------------------------------------------------
 - (void)createText {
     
-    UILabel *messageLabel = nil;
-    //UILabel *messageLabel			= [[UILabel alloc]
-    //                                    initWithFrame:CGRectMake(138.5,[CDevice sharedCDevice].screenHeightMinusStatusBar / 2 - [CDevice sharedCDevice].navBarHeight - 10 - 6,90,20)];
+    UILabel *messageLabel			= [[UILabel alloc]
+                                        initWithFrame:CGRectMake(138.5,self.frame.size.height / 2 - 10 - 6,90,20)];
 	messageLabel.backgroundColor	= [UIColor clearColor];
 	messageLabel.font				= [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];	
 	messageLabel.textColor			= [UIColor colorWithRed:0.454 green:0.454 blue:0.454 alpha:1.0];

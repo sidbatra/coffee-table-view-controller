@@ -31,10 +31,7 @@
 static NSString* const kModelKeyPresenter          = @"ModelKeyPresenter";
 static NSString* const kModelKeyPresenterStyle     = @"ModelKeyPresenterStyle";
 static NSString* const kModelKeyIdentifier         = @"ModelKeyIdentifier";
-
-
-static NSString* const kPresenterClassSuffix        = @"Presenter";
-static NSString* const kMsgNetworkError             = @"No connection; pull to retry.";
+static NSString* const kPresenterClassSuffix       = @"Presenter";
 
 
 /**

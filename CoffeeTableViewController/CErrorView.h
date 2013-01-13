@@ -29,9 +29,7 @@
 
 @protocol CErrorViewDelegate;
 
-/**
- * Generic view for displaying error messages
- */
+
 @interface CErrorView : UIView<CErrorViewProtocol> {
     UILabel         *messageLabel;
     UILabel         *refreshLabel;
@@ -40,29 +38,19 @@
     
     UIImageView     *refreshImageView;
     
-    __weak id<NSObject,CErrorViewDelegate>    _delegate;
+    __weak id<NSObject,CErrorViewDelegate> _delegate;
 }
 
-/**
- * Protocol less delegate allowing error view to
- * be easily interchaged throughout the app
- */
-@property (nonatomic,weak) id<NSObject,CErrorViewDelegate> delegate;
+@property (nonatomic,weak) id<CErrorViewDelegate,NSObject> delegate;
 
 @end
 
 
-/**
- * Protocol for delegates of CErrorView
- */
+
 @protocol CErrorViewDelegate
 
 @optional
 
-/**
- * Fired when the user touches anywhere on the error view.
- */
 - (void)errorViewTouched;
-
 
 @end

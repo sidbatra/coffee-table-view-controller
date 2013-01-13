@@ -28,7 +28,6 @@
 
 
 @interface CLoadingView : UIView {
-    
 }
 
 @end

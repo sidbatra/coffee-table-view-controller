@@ -24,19 +24,14 @@
 //
 
 #import "CErrorView.h"
-//#import "CDevice.h"
-
 
 static NSInteger const kSpinnerSize     = 20;
 static NSString* const kImgRefresh      = @"refresh-gray.png";
 static NSString* const kMsgRefreshText  = @"Try again";
 
 
-/**
- * Private method and property declarations
- */
-@interface CErrorView()
 
+@interface CErrorView()
 
 - (void)createText;
 - (void)createRefreshImage;
@@ -76,13 +71,13 @@ static NSString* const kMsgRefreshText  = @"Try again";
 - (void)createText {
     
     messageLabel                   = [[UILabel alloc] initWithFrame:CGRectMake(0,
-                                                                               0,//[CDevice sharedCDevice].screenHeightMinusStatusBar / 2 - [CDevice sharedCDevice].navBarHeight -10 - 14 - 19,
+                                                                               self.frame.size.height / 2 -10 - 14 - 19,
                                                                                self.frame.size.width,
                                                                                20)];	
 	messageLabel.backgroundColor	= [UIColor clearColor];
 	messageLabel.font				= [UIFont fontWithName:@"HelveticaNeue" size:17];	
 	messageLabel.textColor			= [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0];
-	messageLabel.textAlignment		= NSTextAlignmentLeft;
+	messageLabel.textAlignment		= NSTextAlignmentCenter;
     
 	[self addSubview:messageLabel];
 }
@@ -90,7 +85,7 @@ static NSString* const kMsgRefreshText  = @"Try again";
 //----------------------------------------------------------------------------------------------------
 - (void)createRefreshImage {
     refreshImageView                    = [[UIImageView alloc] initWithFrame:CGRectMake(116.5,
-                                                                                        0,//[CDevice sharedCDevice].screenHeightMinusStatusBar / 2 - [CDevice sharedCDevice].navBarHeight - 14,
+                                                                                        self.frame.size.height / 2 - 14,
                                                                                         13,
                                                                                         15)];
 	refreshImageView.image              = [UIImage imageNamed:kImgRefresh];
@@ -101,7 +96,7 @@ static NSString* const kMsgRefreshText  = @"Try again";
 //----------------------------------------------------------------------------------------------------
 - (void)createRefreshText {
     refreshLabel                    = [[UILabel alloc] initWithFrame:CGRectMake(138.5,
-                                                                                 0,//[CDevice sharedCDevice].screenHeightMinusStatusBar / 2 - [CDevice sharedCDevice].navBarHeight - 14 - 2,
+                                                                                 self.frame.size.height / 2 - 14 - 2,
                                                                                  90,
                                                                                  20)];	
 	refreshLabel.backgroundColor	= [UIColor clearColor];
