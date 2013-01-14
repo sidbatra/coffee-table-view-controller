@@ -15,10 +15,12 @@ NSInteger const kUserCellHeight = 51;
 
 @interface UserCell() {
     UIImageView *userImageView;
+    
     UILabel  *userNameLabel;
     UILabel  *userMessageLabel;
-    
     UILabel *bottomBorder;
+    
+    UIButton *followButton;
         
     BOOL _highlighted;
 }
@@ -51,6 +53,7 @@ NSInteger const kUserCellHeight = 51;
         [self createUserImageView];
         [self createUserNameLabel];
         [self createUserMessageLabel];
+        [self createFollowButton];
         
 		self.selectionStyle = UITableViewCellSelectionStyleBlue;	
 	}
@@ -119,6 +122,24 @@ NSInteger const kUserCellHeight = 51;
 }
 
 //----------------------------------------------------------------------------------------------------
+- (void)createFollowButton {
+    followButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    followButton.frame = CGRectMake(224,12,83,25);
+    
+    [followButton setBackgroundImage:[UIImage imageNamed:@"list-btn-follow-off.png"]
+                            forState:UIControlStateNormal];
+    
+    [followButton setBackgroundImage:[UIImage imageNamed:@"list-btn-follow-on.png"]
+                            forState:UIControlStateHighlighted];
+    
+    [followButton addTarget:self
+                     action:@selector(didTouchUpInsideFollowButton:)
+           forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:followButton];
+}
+
+//----------------------------------------------------------------------------------------------------
 - (void)setUserImage:(UIImage*)image {
     userImageView.image = image;
 }
@@ -158,12 +179,23 @@ NSInteger const kUserCellHeight = 51;
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 #pragma mark -
+#pragma mark UI Events
+
+//----------------------------------------------------------------------------------------------------
+- (void)didTouchUpInsideFollowButton:(UIButton*)button {
+    NSLog(@"FOLLOW CLICKED");
+}
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+#pragma mark -
 #pragma mark Static methods
 
 //----------------------------------------------------------------------------------------------------
 + (NSInteger)heightForCell {
     return kUserCellHeight;
 }
+
 
 
 @end

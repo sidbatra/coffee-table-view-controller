@@ -100,7 +100,6 @@
 
 
 
-
 - (void)addObject:(id)object
           atIndex:(NSInteger)index
        forSection:(NSInteger)sectionIndex
@@ -123,6 +122,14 @@
 
 - (void)removeObject:(id)object 
        withAnimation:(UITableViewRowAnimation)animation;
+
+
+- (void)clean;
+
+/**
+ * Clean array for a particular section.
+ */
+- (void)cleanSection:(NSInteger)sectionIndex;
 
 
 

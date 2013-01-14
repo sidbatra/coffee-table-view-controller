@@ -69,7 +69,7 @@
 
 //----------------------------------------------------------------------------------------------------
 - (void)loadUsers {
-    
+
     NSMutableArray *users = [NSMutableArray arrayWithCapacity:10];
 
     [users addObject:[self createUserWithName:@"Miranda Coykendall"
@@ -112,7 +112,7 @@
                                        byline:@"Co-founder, Shopply. Advisor to Innovation Endeavors in Palo Alto."
                                      imageURL:@"http://graph.facebook.com/513303014/picture?type=square"]];
     
-    
+    [self clean];
     [self addObjects:users];
     
     [self.delegate reloadTableView];    

@@ -48,6 +48,10 @@
 		BB0CA11616A3B06300D4F38C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0CA11516A3B06300D4F38C /* SystemConfiguration.framework */; };
 		BB0CA11816A3B06700D4F38C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0CA11716A3B06700D4F38C /* MobileCoreServices.framework */; };
 		BB0CA11A16A3B07500D4F38C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0CA11916A3B07500D4F38C /* libz.dylib */; };
+		BB0CA11F16A4B6AE00D4F38C /* list-btn-follow-off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0CA11B16A4B6AD00D4F38C /* list-btn-follow-off.png */; };
+		BB0CA12016A4B6AE00D4F38C /* list-btn-follow-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0CA11C16A4B6AD00D4F38C /* list-btn-follow-off@2x.png */; };
+		BB0CA12116A4B6AE00D4F38C /* list-btn-follow-on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0CA11D16A4B6AD00D4F38C /* list-btn-follow-on.png */; };
+		BB0CA12216A4B6AE00D4F38C /* list-btn-follow-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0CA11E16A4B6AD00D4F38C /* list-btn-follow-on@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +136,10 @@
 		BB0CA11516A3B06300D4F38C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BB0CA11716A3B06700D4F38C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BB0CA11916A3B07500D4F38C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BB0CA11B16A4B6AD00D4F38C /* list-btn-follow-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-btn-follow-off.png"; sourceTree = "<group>"; };
+		BB0CA11C16A4B6AD00D4F38C /* list-btn-follow-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-btn-follow-off@2x.png"; sourceTree = "<group>"; };
+		BB0CA11D16A4B6AD00D4F38C /* list-btn-follow-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-btn-follow-on.png"; sourceTree = "<group>"; };
+		BB0CA11E16A4B6AD00D4F38C /* list-btn-follow-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-btn-follow-on@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +195,7 @@
 		BB0CA08916A22C9000D4F38C /* Basic */ = {
 			isa = PBXGroup;
 			children = (
+				BB0CA12316A4B6B400D4F38C /* Assets */,
 				BB0CA10C16A3AFF000D4F38C /* Reachability */,
 				BB0CA0D716A3AD7300D4F38C /* ASI */,
 				BB0CA08A16A22C9000D4F38C /* Supporting Files */,
@@ -328,6 +337,17 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		BB0CA12316A4B6B400D4F38C /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				BB0CA11B16A4B6AD00D4F38C /* list-btn-follow-off.png */,
+				BB0CA11C16A4B6AD00D4F38C /* list-btn-follow-off@2x.png */,
+				BB0CA11D16A4B6AD00D4F38C /* list-btn-follow-on.png */,
+				BB0CA11E16A4B6AD00D4F38C /* list-btn-follow-on@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -384,6 +404,10 @@
 				BB0CA09A16A22C9000D4F38C /* Default-568h@2x.png in Resources */,
 				BB0CA0C616A2592B00D4F38C /* refresh-gray.png in Resources */,
 				BB0CA0C716A2592B00D4F38C /* refresh-gray@2x.png in Resources */,
+				BB0CA11F16A4B6AE00D4F38C /* list-btn-follow-off.png in Resources */,
+				BB0CA12016A4B6AE00D4F38C /* list-btn-follow-off@2x.png in Resources */,
+				BB0CA12116A4B6AE00D4F38C /* list-btn-follow-on.png in Resources */,
+				BB0CA12216A4B6AE00D4F38C /* list-btn-follow-on@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

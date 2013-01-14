@@ -150,6 +150,24 @@ static NSInteger const kDefaultTotalSections = 1;
                       inSection:kDefaultTotalSections-1];
 }
 
+//----------------------------------------------------------------------------------------------------
+- (void)clean {
+    [self cleanSection:kDefaultTotalSections-1];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)cleanSection:(NSInteger)sectionIndex {
+    NSMutableArray *section = [self sectionAtIndex:sectionIndex];
+    
+    if(!section)
+        return;
+    
+    [self.objects removeObjectAtIndex:sectionIndex];
+    
+    [self.objects insertObject:[NSMutableArray array]
+                       atIndex:sectionIndex];
+}
+
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
@@ -164,7 +182,7 @@ static NSInteger const kDefaultTotalSections = 1;
     
     if(!section)
         return;
-    
+        
     [section addObjectsFromArray:newObjects];
 }
 
