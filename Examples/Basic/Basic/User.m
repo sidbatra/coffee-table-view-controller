@@ -43,6 +43,7 @@ NSString* const kNUserImageLoaded = @"NUserImageLoaded";
 //----------------------------------------------------------------------------------------------------
 @implementation User
 
+@synthesize identifier  = _identifier;
 @synthesize name        = _name;
 @synthesize byline      = _byline;
 @synthesize imageURL    = _imageURL;

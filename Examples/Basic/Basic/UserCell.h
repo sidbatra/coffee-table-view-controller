@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UserCellDelegate;
+
 
 @interface UserCell : UITableViewCell {
     NSInteger _userID;
+    
+    __weak id<UserCellDelegate> _delegate;
 }
 
 @property (nonatomic,assign) NSInteger userID;
+@property (nonatomic,weak) id<UserCellDelegate> delegate;
 
 /**
  * Reset cell UI before changing the values.
@@ -41,6 +46,16 @@
  * Return the height of the cell.
  */
 + (NSInteger)heightForCell;
+
+@end
+
+
+
+@protocol UserCellDelegate
+
+@required
+
+- (void)userCellFollowButtonClicked:(NSInteger)userID;
 
 @end
 

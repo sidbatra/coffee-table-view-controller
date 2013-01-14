@@ -28,12 +28,17 @@
 extern  NSString* const kNUserImageLoaded;
 
 @interface User : NSObject {
+    NSInteger   _identifier;
+    
     NSString    *_name;
     NSString    *_byline;
     NSString    *_imageURL;
     
     UIImage     *_image;
 }
+
+@property (nonatomic,assign) NSInteger identifier;
+
 
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,copy) NSString *byline;

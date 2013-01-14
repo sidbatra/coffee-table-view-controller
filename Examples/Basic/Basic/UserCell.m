@@ -37,6 +37,7 @@ NSInteger const kUserCellHeight = 51;
 @implementation UserCell
 
 @synthesize userID      = _userID;
+@synthesize delegate    = _delegate;
 @synthesize highlighted = _highlighted;
 
 //----------------------------------------------------------------------------------------------------
@@ -183,7 +184,7 @@ NSInteger const kUserCellHeight = 51;
 
 //----------------------------------------------------------------------------------------------------
 - (void)didTouchUpInsideFollowButton:(UIButton*)button {
-    NSLog(@"FOLLOW CLICKED");
+    [self.delegate userCellFollowButtonClicked:self.userID];
 }
 
 //----------------------------------------------------------------------------------------------------

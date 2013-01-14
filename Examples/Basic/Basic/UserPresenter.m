@@ -31,7 +31,8 @@
         cell = [[UserCell alloc] initWithStyle:UITableViewStylePlain 
                                  reuseIdentifier:identifier];
     
-    //cell.userID = user.databaseID;
+    cell.userID = user.identifier;
+    cell.delegate = delegate;
     
     [cell resetUI];
     

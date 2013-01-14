@@ -51,10 +51,12 @@
 //----------------------------------------------------------------------------------------------------
 - (User*)createUserWithName:(NSString*)name
                       byline:(NSString*)byline
-                    imageURL:(NSString*)imageURL {
+                    imageURL:(NSString*)imageURL
+                 identifier:(NSInteger)identifier {
     
     User *user = [[User alloc] init];
     
+    user.identifier = identifier;
     user.name = name;
     user.byline = byline;
     user.imageURL = imageURL;
@@ -74,43 +76,53 @@
 
     [users addObject:[self createUserWithName:@"Miranda Coykendall"
                                        byline:@"PR professional with a background in journalism. Focus in the consumer, technology, social media and cleantech spaces."
-                                     imageURL:@"http://graph.facebook.com/731360547/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/731360547/picture?type=square"
+                                   identifier:0]];
     
     [users addObject:[self createUserWithName:@"Josh Cincinnati"
                                        byline:@"Likes: newness, gadgets, and green tea. Chasing ideas in Texas. Sometimes, I make jokes. Sometimes, you laugh. Oftentimes, they are not at the same time."
-                                     imageURL:@"http://graph.facebook.com/1500439/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/1500439/picture?type=square"
+                                   identifier:1]];
     
     [users addObject:[self createUserWithName:@"Swati Dube"
                                        byline:@"Start-up enthusiast, love meeting new people and exchanging ideas, love my work :)"
-                                     imageURL:@"http://graph.facebook.com/799510289/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/799510289/picture?type=square"
+                                   identifier:2]];
     
     [users addObject:[self createUserWithName:@"Pratyus Patnaik"
                                        byline:@"Appurify, Zynga, Oracle, Stanford, IIIT, India, Silicon Valley!"
-                                     imageURL:@"http://graph.facebook.com/500870876/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/500870876/picture?type=square"
+                                   identifier:3]];
     
     [users addObject:[self createUserWithName:@"Kevin Hartz"
                                        byline:@"CEO Eventbrite"
-                                     imageURL:@"http://graph.facebook.com/210914/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/210914/picture?type=square"
+                                   identifier:4]];
     
     [users addObject:[self createUserWithName:@"Suchit Agarwal"
                                        byline:@"Phd Dropout, Startup Enthusiast, Gnarlar at Twitter, Voracious Reader, History Buff, Movie Maniac. I help the cause of democratic imperialism all over the world"
-                                     imageURL:@"http://api.twitter.com/1/users/profile_image?user_id=18895807&size=bigger"]];
+                                     imageURL:@"http://api.twitter.com/1/users/profile_image?user_id=18895807&size=bigger"
+                                   identifier:5]];
     
     [users addObject:[self createUserWithName:@"Siddharth Batra"
                                        byline:@"One of the makers of Mine. Ping me anytime for feedback - @sidbatra"
-                                     imageURL:@"http://graph.facebook.com/502835064/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/502835064/picture?type=square"
+                                   identifier:6]];
     
     [users addObject:[self createUserWithName:@"Jessica McCall"
                                        byline:@"Lover of pretty things. :-)"
-                                     imageURL:@"http://api.twitter.com/1/users/profile_image?user_id=38529101&size=bigger"]];
+                                     imageURL:@"http://api.twitter.com/1/users/profile_image?user_id=38529101&size=bigger"
+                                   identifier:7]];
     
     [users addObject:[self createUserWithName:@"Shayne Fitz-Coy"
                                        byline:@"http://nyti.ms/nkJM81"
-                                     imageURL:@"http://graph.facebook.com/21072/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/21072/picture?type=square"
+                                   identifier:8]];
     
     [users addObject:[self createUserWithName:@"Chris Couhault"
                                        byline:@"Co-founder, Shopply. Advisor to Innovation Endeavors in Palo Alto."
-                                     imageURL:@"http://graph.facebook.com/513303014/picture?type=square"]];
+                                     imageURL:@"http://graph.facebook.com/513303014/picture?type=square"
+                                   identifier:9]];
     
     [self clean];
     [self addObjects:users];
