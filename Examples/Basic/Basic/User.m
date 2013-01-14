@@ -24,6 +24,17 @@
 //
 
 #import "User.h"
+#import "ASIHTTPRequest.h"
+
+NSString* const kNUserImageLoaded = @"NUserImageLoaded";
+
+
+
+@interface User() {
+    BOOL _isDownloading;
+}
+
+@end
 
 
 
@@ -35,5 +46,40 @@
 @synthesize name        = _name;
 @synthesize byline      = _byline;
 @synthesize imageURL    = _imageURL;
+@synthesize image       = _image;
+
+//----------------------------------------------------------------------------------------------------
+- (void)downloadImage {
+    if(_isDownloading || self.image)
+        return;
+    
+    _isDownloading = YES;
+	
+	ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[[NSURL alloc] initWithString:self.imageURL]];
+    [request setDelegate:self];
+	[request setRequestMethod:@"GET"];
+	[request startAsynchronous];    
+}
+
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+#pragma mark -
+#pragma mark ASIHTTPRequestDelegate
+
+//----------------------------------------------------------------------------------------------------
+- (void)requestFinished:(ASIHTTPRequest*)request {
+    self.image = [UIImage imageWithData:[request responseData]];
+    
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNUserImageLoaded
+														object:self
+													  userInfo:nil];
+    
+    _isDownloading = NO;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)requestFailed:(ASIHTTPRequest*)request {
+}
 
 @end

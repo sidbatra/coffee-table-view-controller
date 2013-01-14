@@ -35,9 +35,8 @@
     
     [cell resetUI];
     
-    //[user downloadSquareImage];
-    
-    //[cell setUserImage:user.squareImage];
+    [user downloadImage];
+    [cell setUserImage:user.image];
     
 
     if(style == kUserPresenterStyleWithByline)
@@ -64,13 +63,13 @@
                     andUpdatedKey:(NSString*)updatedKey; {
     
     
-    //User *user            = object;
-    //UserCell *cell        = base;
+    User *user       = object;
+    UserCell *cell   = base;
     
-    //if([user class] == objectClass && user.databaseID == objectID) {
-    //    if(objectKey == kKeySquareImageURL)
-    //        [cell setUserImage:user.squareImage];
-    //}
+    if(user == updatedObject) {
+        if([updatedKey isEqualToString:@"image"])
+            [cell setUserImage:user.image];
+    }
 }
 
 //----------------------------------------------------------------------------------------------------

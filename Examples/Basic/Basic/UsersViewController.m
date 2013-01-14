@@ -50,11 +50,11 @@
                               withStyle:kUserPresenterStyleWithByline
                           withPresenter:[UserPresenter class]];
         
-        /*
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(userSquareImageLoaded:)
-                                                     name:kNImgUserSquareLoaded
-                                                   object:nil];*/
+                                                 selector:@selector(userImageLoaded:)
+                                                     name:kNUserImageLoaded
+                                                   object:nil];
         
         
         self.tableViewDataSource = [[UsersViewDataSource alloc] init];
@@ -75,6 +75,18 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1.0];
     
     [(UsersViewDataSource*)self.tableViewDataSource loadDelayedUsers];
+}
+
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+#pragma mark -
+#pragma mark Notifications
+
+//----------------------------------------------------------------------------------------------------
+- (void)userImageLoaded:(NSNotification*)notification {
+    [self provideResourceToVisibleCells:notification.object
+                             updatedKey:@"image"];
 }
 
 @end
