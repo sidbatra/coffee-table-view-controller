@@ -45,9 +45,8 @@
     
     if(self) {
 
-        
         [self addModelPresenterForClass:[User class]
-                              withStyle:kUserPresenterStyleWithByline
+                              withStyle:kUserPresenterStyleWithByline //TIP: Try replacing with kModelPresenterDefaultStyle
                           withPresenter:[UserPresenter class]];
         
         
