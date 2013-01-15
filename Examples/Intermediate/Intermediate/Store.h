@@ -1,5 +1,5 @@
 //
-//  UsersViewController.h
+//  Store.h
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,8 +23,26 @@
 //  THE SOFTWARE.
 //
 
-#import "CTableViewController.h"
+#import <Foundation/Foundation.h>
 
-@interface UsersViewController : CTableViewController
+extern  NSString* const kNStoreImageLoaded;
+
+
+@interface Store : NSObject {
+    NSInteger   _identifier;
+    
+    NSString    *_name;
+    NSString    *_imageURL;
+    
+    UIImage     *_image;
+}
+
+@property (nonatomic,assign) NSInteger identifier;
+
+
+@property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSString *imageURL;
+
+@property (nonatomic,strong) UIImage *image;
 
 @end

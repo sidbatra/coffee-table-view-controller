@@ -1,5 +1,5 @@
 //
-//  UsersViewDataSource.m
+//  StoreViewDataSource.m
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import "UsersViewDataSource.h"
+#import "StoreViewDataSource.h"
 #import "User.h"
 
 
@@ -31,7 +31,7 @@
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
-@implementation UsersViewDataSource
+@implementation StoreViewDataSource
 
 //----------------------------------------------------------------------------------------------------
 - (id)init {

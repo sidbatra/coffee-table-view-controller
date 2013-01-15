@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 
-#import "UsersViewController.h"
+#import "StoreViewController.h"
 
 
 
@@ -24,10 +24,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     
-    UsersViewController *usersViewController = [[UsersViewController alloc] init];
+    StoreViewController *storeViewController = [[StoreViewController alloc] init];
     
     self.window.backgroundColor = [UIColor whiteColor];
-    [self.window setRootViewController:usersViewController];
+    [self.window setRootViewController:storeViewController];
     [self.window makeKeyAndVisible];
     return YES;
 }

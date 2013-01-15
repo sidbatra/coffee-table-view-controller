@@ -1,5 +1,5 @@
 //
-//  UsersViewController.m
+//  StoreViewController.m
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,12 +23,12 @@
 //  THE SOFTWARE.
 //
 
-#import "UsersViewController.h"
-#import "UsersViewDataSource.h"
+#import "StoreViewController.h"
+#import "StoreViewDataSource.h"
 #import "UserPresenter.h"
 #import "User.h"
 
-@interface UsersViewController ()
+@interface StoreViewController ()
 
 @end
 
@@ -37,7 +37,7 @@
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
-@implementation UsersViewController
+@implementation StoreViewController
 
 //----------------------------------------------------------------------------------------------------
 - (id)init {
@@ -56,7 +56,7 @@
                                                    object:nil];
         
         
-        self.tableViewDataSource = [[UsersViewDataSource alloc] init];
+        self.tableViewDataSource = [[StoreViewDataSource alloc] init];
     }
     
     return self;
@@ -73,7 +73,7 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1.0];
     
-    [(UsersViewDataSource*)self.tableViewDataSource loadDelayedUsers];
+    [(StoreViewDataSource*)self.tableViewDataSource loadDelayedUsers];
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  UsersViewDataSource.h
+//  StoreViewDataSource.h
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -26,7 +26,7 @@
 #import "CTableViewDataSource.h"
 
 
-@interface UsersViewDataSource : CTableViewDataSource
+@interface StoreViewDataSource : CTableViewDataSource
 
 - (void)loadUsers;
 - (void)loadDelayedUsers;
