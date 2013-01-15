@@ -80,7 +80,7 @@
                 withDelegate:(id)delegate {
     
     
-    SEL sel = @selector(userPresenterUserSelected:);
+    SEL sel = @selector(userCellSelected:);
     
     if(![delegate respondsToSelector:sel])
         return;
