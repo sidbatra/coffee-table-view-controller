@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
 @protocol UserCellDelegate;
 
 
@@ -55,6 +56,7 @@
 
 @required
 
+- (void)userCellSelected:(User*)user;
 - (void)userCellFollowButtonClicked:(NSInteger)userID;
 
 @end
