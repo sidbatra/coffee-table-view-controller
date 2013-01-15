@@ -1,5 +1,5 @@
 //
-//  AppDelegate.m
+//  User.h
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,29 +23,30 @@
 //  THE SOFTWARE.
 //
 
-#import "AppDelegate.h"
+#import <Foundation/Foundation.h>
 
-#import "UsersViewController.h"
+extern  NSString* const kNUserImageLoaded;
 
-
-
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-@implementation AppDelegate
-
-//----------------------------------------------------------------------------------------------------
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+@interface User : NSObject {
+    NSInteger   _identifier;
     
+    NSString    *_name;
+    NSString    *_byline;
+    NSString    *_imageURL;
     
-    UsersViewController *usersViewController = [[UsersViewController alloc] init];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window setRootViewController:usersViewController];
-    [self.window makeKeyAndVisible];
-    return YES;
+    UIImage     *_image;
 }
+
+@property (nonatomic,assign) NSInteger identifier;
+
+
+@property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSString *byline;
+@property (nonatomic,copy) NSString *imageURL;
+
+@property (nonatomic,strong) UIImage *image;
+
+
+- (void)downloadImage;
 
 @end

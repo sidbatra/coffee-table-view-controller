@@ -1,5 +1,5 @@
 //
-//  AppDelegate.m
+//  UsersViewController.h
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,29 +23,8 @@
 //  THE SOFTWARE.
 //
 
-#import "AppDelegate.h"
+#import "CTableViewController.h"
 
-#import "UsersViewController.h"
-
-
-
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-@implementation AppDelegate
-
-//----------------------------------------------------------------------------------------------------
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    
-    UsersViewController *usersViewController = [[UsersViewController alloc] init];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window setRootViewController:usersViewController];
-    [self.window makeKeyAndVisible];
-    return YES;
-}
+@interface UsersViewController : CTableViewController
 
 @end

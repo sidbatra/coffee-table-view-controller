@@ -1,5 +1,5 @@
 //
-//  AppDelegate.m
+//  User.m
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,29 +23,64 @@
 //  THE SOFTWARE.
 //
 
-#import "AppDelegate.h"
+#import "User.h"
+#import "ASIHTTPRequest.h"
 
-#import "UsersViewController.h"
+NSString* const kNUserImageLoaded = @"NUserImageLoaded";
+
+
+
+@interface User() {
+    BOOL _isDownloading;
+}
+
+@end
 
 
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
-@implementation AppDelegate
+@implementation User
+
+@synthesize identifier  = _identifier;
+@synthesize name        = _name;
+@synthesize byline      = _byline;
+@synthesize imageURL    = _imageURL;
+@synthesize image       = _image;
 
 //----------------------------------------------------------------------------------------------------
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+- (void)downloadImage {
+    if(_isDownloading || self.image)
+        return;
     
+    _isDownloading = YES;
+	
+	ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[[NSURL alloc] initWithString:self.imageURL]];
+    [request setDelegate:self];
+	[request setRequestMethod:@"GET"];
+	[request startAsynchronous];    
+}
+
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+#pragma mark -
+#pragma mark ASIHTTPRequestDelegate
+
+//----------------------------------------------------------------------------------------------------
+- (void)requestFinished:(ASIHTTPRequest*)request {
+    self.image = [UIImage imageWithData:[request responseData]];
     
-    UsersViewController *usersViewController = [[UsersViewController alloc] init];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNUserImageLoaded
+														object:self
+													  userInfo:nil];
     
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window setRootViewController:usersViewController];
-    [self.window makeKeyAndVisible];
-    return YES;
+    _isDownloading = NO;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (void)requestFailed:(ASIHTTPRequest*)request {
 }
 
 @end
