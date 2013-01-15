@@ -29,6 +29,9 @@
 #import "User.h"
 #import "StorePresenter.h"
 #import "Store.h"
+#import "MessagePresenter.h"
+#import "Message.h"
+
 
 @interface StoreViewController ()
 
@@ -54,6 +57,10 @@
         [self addModelPresenterForClass:[User class]
                               withStyle:kUserPresenterStyleWithByline //TIP: Try replacing with kModelPresenterDefaultStyle
                           withPresenter:[UserPresenter class]];
+        
+        [self addModelPresenterForClass:[Message class]
+                              withStyle:kModelPresenterDefaultStyle
+                          withPresenter:[MessagePresenter class]];
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self

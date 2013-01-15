@@ -1,5 +1,5 @@
 //
-//  StorePresenter.m
+//  MessagePresenter.m
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,16 +23,16 @@
 //  THE SOFTWARE.
 //
 
-#import "StorePresenter.h"
+#import "MessagePresenter.h"
+#import "Message.h"
+#import "MessageCell.h"
 
-#import "Store.h"
-#import "StoreCell.h"
 
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
-@implementation StorePresenter
+@implementation MessagePresenter
 
 //----------------------------------------------------------------------------------------------------
 + (UITableViewCell*)cellForObject:(id)object
@@ -41,19 +41,14 @@
                      withDelegate:(id)delegate
              andPresentationStyle:(NSInteger)style {
     
-    Store *store        = object;
-    StoreCell *cell    = base;
+    Message *message = object;
+    MessageCell *cell   = base;
     
     if(!cell)
-        cell = [[StoreCell alloc] initWithStyle:UITableViewStylePlain
-                            reuseIdentifier:identifier];
+        cell = [[MessageCell alloc] initWithStyle:UITableViewStylePlain
+                                  reuseIdentifier:identifier];
     
-    
-    [cell resetUI];
-    
-    [store downloadImage];
-    [cell setStoreImage:store.image];
-    
+    [cell setText:message.text];
     
     return cell;
 }
@@ -62,7 +57,7 @@
 + (CGFloat)heightForObject:(id)object
      withPresentationStyle:(NSInteger)style {
     
-    return [StoreCell heightForCell];
+    return [MessageCell height];
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -72,14 +67,6 @@
                 withUpdatedObject:(id)updatedObject
                     andUpdatedKey:(NSString*)updatedKey {
     
-    
-    Store *store       = object;
-    StoreCell *cell   = base;
-    
-    if(store == updatedObject) {
-        if([updatedKey isEqualToString:@"image"])
-            [cell setStoreImage:store.image];
-    }
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -87,7 +74,6 @@
                 withBaseCell:(id)base
        withPresentationStyle:(NSInteger)style
                 withDelegate:(id)delegate {
-    
 }
 
 @end

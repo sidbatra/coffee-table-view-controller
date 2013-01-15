@@ -1,5 +1,5 @@
 //
-//  StorePresenter.m
+//  MessageCell.m
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,71 +23,60 @@
 //  THE SOFTWARE.
 //
 
-#import "StorePresenter.h"
+#import "MessageCell.h"
 
-#import "Store.h"
-#import "StoreCell.h"
+@interface MessageCell() {
+    UILabel         *messageLabel;
+}
+@end
 
 
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-@implementation StorePresenter
 
 //----------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)cellForObject:(id)object
-                     withBaseCell:(id)base
-               withCellIdentifier:(NSString*)identifier
-                     withDelegate:(id)delegate
-             andPresentationStyle:(NSInteger)style {
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+@implementation MessageCell
+
+//----------------------------------------------------------------------------------------------------
+- (id)initWithStyle:(UITableViewCellStyle)style
+	reuseIdentifier:(NSString *)reuseIdentifier {
     
-    Store *store        = object;
-    StoreCell *cell    = base;
-    
-    if(!cell)
-        cell = [[StoreCell alloc] initWithStyle:UITableViewStylePlain
-                            reuseIdentifier:identifier];
-    
-    
-    [cell resetUI];
-    
-    [store downloadImage];
-    [cell setStoreImage:store.image];
-    
-    
-    return cell;
+    self = [super initWithStyle:style
+				reuseIdentifier:reuseIdentifier];
+	
+    if (self) {
+        self.contentView.clipsToBounds = YES;
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        self.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        
+        [self createMessageLabel];
+	}
+	
+    return self;
 }
 
 //----------------------------------------------------------------------------------------------------
-+ (CGFloat)heightForObject:(id)object
-     withPresentationStyle:(NSInteger)style {
+- (void)createMessageLabel {
+    messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,20,self.frame.size.width,30)];
     
-    return [StoreCell heightForCell];
+    messageLabel.numberOfLines        = 1;
+    messageLabel.backgroundColor      = [UIColor clearColor];
+    messageLabel.font                 = [UIFont fontWithName:@"HelveticaNeue" size:13];
+    messageLabel.textColor            = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0];
+    messageLabel.textAlignment        = NSTextAlignmentCenter;
+    
+    [self.contentView addSubview:messageLabel];
 }
 
 //----------------------------------------------------------------------------------------------------
-+ (void)updatePresentationForCell:(id)base
-                         ofObject:(id)object
-            withPresentationStyle:(NSInteger)style
-                withUpdatedObject:(id)updatedObject
-                    andUpdatedKey:(NSString*)updatedKey {
-    
-    
-    Store *store       = object;
-    StoreCell *cell   = base;
-    
-    if(store == updatedObject) {
-        if([updatedKey isEqualToString:@"image"])
-            [cell setStoreImage:store.image];
-    }
+- (void)setText:(NSString *)text {
+    messageLabel.text = text;
 }
 
 //----------------------------------------------------------------------------------------------------
-+ (void)cellClickedForObject:(id)object
-                withBaseCell:(id)base
-       withPresentationStyle:(NSInteger)style
-                withDelegate:(id)delegate {
-    
++ (NSInteger)height {
+    return 60;
 }
 
 @end

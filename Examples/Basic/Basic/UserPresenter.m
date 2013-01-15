@@ -78,7 +78,7 @@
                          ofObject:(id)object
             withPresentationStyle:(NSInteger)style
                 withUpdatedObject:(id)updatedObject
-                    andUpdatedKey:(NSString*)updatedKey; {
+                    andUpdatedKey:(NSString*)updatedKey {
     
     
     User *user       = object;

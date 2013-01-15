@@ -55,6 +55,9 @@
 		BB4A832616A5F25D00048182 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832516A5F25D00048182 /* Store.m */; };
 		BB4A832916A6115F00048182 /* StoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832816A6115F00048182 /* StoreCell.m */; };
 		BB4A832C16A6128800048182 /* StorePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832B16A6128800048182 /* StorePresenter.m */; };
+		BB4A833216A6178A00048182 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A833116A6178A00048182 /* Message.m */; };
+		BB4A833516A617E900048182 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A833416A617E900048182 /* MessageCell.m */; };
+		BB4A833816A6198500048182 /* MessagePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A833716A6198500048182 /* MessagePresenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +152,12 @@
 		BB4A832816A6115F00048182 /* StoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreCell.m; sourceTree = "<group>"; };
 		BB4A832A16A6128800048182 /* StorePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorePresenter.h; sourceTree = "<group>"; };
 		BB4A832B16A6128800048182 /* StorePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorePresenter.m; sourceTree = "<group>"; };
+		BB4A833016A6178A00048182 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		BB4A833116A6178A00048182 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		BB4A833316A617E900048182 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		BB4A833416A617E900048182 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		BB4A833616A6198500048182 /* MessagePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePresenter.h; sourceTree = "<group>"; };
+		BB4A833716A6198500048182 /* MessagePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePresenter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,28 +213,19 @@
 		BB4A824B16A4EBEA00048182 /* Intermediate */ = {
 			isa = PBXGroup;
 			children = (
+				BB4A824C16A4EBEA00048182 /* Supporting Files */,
 				BB4A82EC16A4F9BC00048182 /* ASI */,
 				BB4A82EB16A4F9A100048182 /* Assets */,
 				BB4A828A16A4F87100048182 /* Reachability */,
-				BB4A829B16A4F87100048182 /* User.h */,
-				BB4A829C16A4F87100048182 /* User.m */,
-				BB4A829D16A4F87100048182 /* UserCell.h */,
-				BB4A829E16A4F87100048182 /* UserCell.m */,
-				BB4A829F16A4F87100048182 /* UserPresenter.h */,
-				BB4A82A016A4F87100048182 /* UserPresenter.m */,
-				BB4A832416A5F25D00048182 /* Store.h */,
-				BB4A832516A5F25D00048182 /* Store.m */,
-				BB4A832716A6115F00048182 /* StoreCell.h */,
-				BB4A832816A6115F00048182 /* StoreCell.m */,
-				BB4A832A16A6128800048182 /* StorePresenter.h */,
-				BB4A832B16A6128800048182 /* StorePresenter.m */,
+				BB4A832D16A6166500048182 /* Models */,
+				BB4A832E16A6167500048182 /* TableViewCells */,
+				BB4A832F16A6168600048182 /* Presenters */,
 				BB4A831E16A5F0BF00048182 /* StoreViewController.h */,
 				BB4A831F16A5F0BF00048182 /* StoreViewController.m */,
 				BB4A832016A5F0BF00048182 /* StoreViewDataSource.h */,
 				BB4A832116A5F0BF00048182 /* StoreViewDataSource.m */,
 				BB4A825416A4EBEA00048182 /* AppDelegate.h */,
 				BB4A825516A4EBEA00048182 /* AppDelegate.m */,
-				BB4A824C16A4EBEA00048182 /* Supporting Files */,
 			);
 			path = Intermediate;
 			sourceTree = "<group>";
@@ -371,6 +371,45 @@
 			path = S3;
 			sourceTree = "<group>";
 		};
+		BB4A832D16A6166500048182 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB4A829B16A4F87100048182 /* User.h */,
+				BB4A829C16A4F87100048182 /* User.m */,
+				BB4A832416A5F25D00048182 /* Store.h */,
+				BB4A832516A5F25D00048182 /* Store.m */,
+				BB4A833016A6178A00048182 /* Message.h */,
+				BB4A833116A6178A00048182 /* Message.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BB4A832E16A6167500048182 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				BB4A829D16A4F87100048182 /* UserCell.h */,
+				BB4A829E16A4F87100048182 /* UserCell.m */,
+				BB4A832716A6115F00048182 /* StoreCell.h */,
+				BB4A832816A6115F00048182 /* StoreCell.m */,
+				BB4A833316A617E900048182 /* MessageCell.h */,
+				BB4A833416A617E900048182 /* MessageCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		BB4A832F16A6168600048182 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				BB4A829F16A4F87100048182 /* UserPresenter.h */,
+				BB4A82A016A4F87100048182 /* UserPresenter.m */,
+				BB4A832A16A6128800048182 /* StorePresenter.h */,
+				BB4A832B16A6128800048182 /* StorePresenter.m */,
+				BB4A833616A6198500048182 /* MessagePresenter.h */,
+				BB4A833716A6198500048182 /* MessagePresenter.m */,
+			);
+			name = Presenters;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -472,6 +511,9 @@
 				BB4A832616A5F25D00048182 /* Store.m in Sources */,
 				BB4A832916A6115F00048182 /* StoreCell.m in Sources */,
 				BB4A832C16A6128800048182 /* StorePresenter.m in Sources */,
+				BB4A833216A6178A00048182 /* Message.m in Sources */,
+				BB4A833516A617E900048182 /* MessageCell.m in Sources */,
+				BB4A833816A6198500048182 /* MessagePresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,7 @@
 #import "StoreViewDataSource.h"
 #import "User.h"
 #import "Store.h"
+#import "Message.h"
 
 
 
@@ -69,10 +70,18 @@
 - (Store*)createStoreWithImageURL:(NSString*)imageURL {
     
     Store *store = [[Store alloc] init];
-    
     store.imageURL = imageURL;
     
     return store;
+}
+
+//----------------------------------------------------------------------------------------------------
+- (Message*)createMessageWithText:(NSString*)text {
+
+    Message *message = [[Message alloc] init];
+    message.text = text;
+    
+    return message;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -137,6 +146,8 @@
                                        byline:@"Co-founder, Shopply. Advisor to Innovation Endeavors in Palo Alto."
                                      imageURL:@"http://graph.facebook.com/513303014/picture?type=square"
                                    identifier:9]];
+    
+    [models addObject:[self createMessageWithText:@"Add more users from the nav bar +"]];
     
     [self clean];
     [self addObjects:models];
