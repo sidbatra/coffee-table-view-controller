@@ -1,5 +1,5 @@
 //
-//  UserCell.h
+//  StoreCell.h
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -25,18 +25,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class User;
-@protocol UserCellDelegate;
 
-
-@interface UserCell : UITableViewCell {
-    NSInteger _userID;
-    
-    __weak id<UserCellDelegate> _delegate;
-}
-
-@property (nonatomic,assign) NSInteger userID;
-@property (nonatomic,weak) id<UserCellDelegate> delegate;
+@interface StoreCell : UITableViewCell
 
 /**
  * Reset cell UI before changing the values.
@@ -44,37 +34,12 @@
 - (void)resetUI;
 
 /**
- * Set the user image in the cell.
+ * Set the store image in the cell.
  */
-- (void)setUserImage:(UIImage*)image;
-
-/**
- * Set the user name in the cell.
- */
-- (void)setUserName:(NSString*)userName;
-
-/**
- * Set the user name and message in the cell
- */
-- (void)setUserName:(NSString*)userName
-         andMessage:(NSString*)message;
-
+- (void)setStoreImage:(UIImage*)image;
 
 /**
  * Return the height of the cell.
  */
 + (NSInteger)heightForCell;
-
 @end
-
-
-
-@protocol UserCellDelegate
-
-@required
-
-- (void)userCellSelected:(User*)user;
-- (void)userCellFollowButtonClicked:(NSInteger)userID;
-
-@end
-

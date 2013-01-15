@@ -27,6 +27,8 @@
 #import "StoreViewDataSource.h"
 #import "UserPresenter.h"
 #import "User.h"
+#import "StorePresenter.h"
+#import "Store.h"
 
 @interface StoreViewController ()
 
@@ -44,6 +46,10 @@
     self = [super init];
     
     if(self) {
+        
+        [self addModelPresenterForClass:[Store class]
+                              withStyle:kModelPresenterDefaultStyle
+                          withPresenter:[StorePresenter class]];
 
         [self addModelPresenterForClass:[User class]
                               withStyle:kUserPresenterStyleWithByline //TIP: Try replacing with kModelPresenterDefaultStyle
@@ -53,6 +59,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(userImageLoaded:)
                                                      name:kNUserImageLoaded
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(storeImageLoaded:)
+                                                     name:kNStoreImageLoaded
                                                    object:nil];
         
         
@@ -73,7 +84,7 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1.0];
     
-    [(StoreViewDataSource*)self.tableViewDataSource loadDelayedUsers];
+    [(StoreViewDataSource*)self.tableViewDataSource loadDelayedData];
 }
 
 
@@ -103,6 +114,12 @@
 //----------------------------------------------------------------------------------------------------
 #pragma mark -
 #pragma mark Notifications
+
+//----------------------------------------------------------------------------------------------------
+- (void)storeImageLoaded:(NSNotification*)notification {
+    [self provideResourceToVisibleCells:notification.object
+                             updatedKey:@"image"];
+}
 
 //----------------------------------------------------------------------------------------------------
 - (void)userImageLoaded:(NSNotification*)notification {

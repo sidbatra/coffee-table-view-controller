@@ -53,6 +53,8 @@
 		BB4A832216A5F0BF00048182 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A831F16A5F0BF00048182 /* StoreViewController.m */; };
 		BB4A832316A5F0BF00048182 /* StoreViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832116A5F0BF00048182 /* StoreViewDataSource.m */; };
 		BB4A832616A5F25D00048182 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832516A5F25D00048182 /* Store.m */; };
+		BB4A832916A6115F00048182 /* StoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832816A6115F00048182 /* StoreCell.m */; };
+		BB4A832C16A6128800048182 /* StorePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A832B16A6128800048182 /* StorePresenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +145,10 @@
 		BB4A832116A5F0BF00048182 /* StoreViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewDataSource.m; sourceTree = "<group>"; };
 		BB4A832416A5F25D00048182 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
 		BB4A832516A5F25D00048182 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		BB4A832716A6115F00048182 /* StoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCell.h; sourceTree = "<group>"; };
+		BB4A832816A6115F00048182 /* StoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreCell.m; sourceTree = "<group>"; };
+		BB4A832A16A6128800048182 /* StorePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorePresenter.h; sourceTree = "<group>"; };
+		BB4A832B16A6128800048182 /* StorePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorePresenter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,10 @@
 				BB4A82A016A4F87100048182 /* UserPresenter.m */,
 				BB4A832416A5F25D00048182 /* Store.h */,
 				BB4A832516A5F25D00048182 /* Store.m */,
+				BB4A832716A6115F00048182 /* StoreCell.h */,
+				BB4A832816A6115F00048182 /* StoreCell.m */,
+				BB4A832A16A6128800048182 /* StorePresenter.h */,
+				BB4A832B16A6128800048182 /* StorePresenter.m */,
 				BB4A831E16A5F0BF00048182 /* StoreViewController.h */,
 				BB4A831F16A5F0BF00048182 /* StoreViewController.m */,
 				BB4A832016A5F0BF00048182 /* StoreViewDataSource.h */,
@@ -460,6 +470,8 @@
 				BB4A832216A5F0BF00048182 /* StoreViewController.m in Sources */,
 				BB4A832316A5F0BF00048182 /* StoreViewDataSource.m in Sources */,
 				BB4A832616A5F25D00048182 /* Store.m in Sources */,
+				BB4A832916A6115F00048182 /* StoreCell.m in Sources */,
+				BB4A832C16A6128800048182 /* StorePresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

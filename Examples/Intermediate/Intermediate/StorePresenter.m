@@ -1,5 +1,5 @@
 //
-//  UserPresenter.m
+//  StorePresenter.m
 //
 //  Created by Siddharth Batra
 //  Copyright 2013. All rights reserved.
@@ -23,16 +23,16 @@
 //  THE SOFTWARE.
 //
 
-#import "UserPresenter.h"
+#import "StorePresenter.h"
 
-#import "UserCell.h"
-#import "User.h"
+#import "Store.h"
+#import "StoreCell.h"
 
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
-@implementation UserPresenter
+@implementation StorePresenter
 
 //----------------------------------------------------------------------------------------------------
 + (UITableViewCell*)cellForObject:(id)object
@@ -41,36 +41,28 @@
                      withDelegate:(id)delegate
              andPresentationStyle:(NSInteger)style {
     
-    User *user        = object;
-    UserCell *cell    = base;
+    Store *store        = object;
+    StoreCell *cell    = base;
     
     if(!cell)
-        cell = [[UserCell alloc] initWithStyle:UITableViewStylePlain 
-                                 reuseIdentifier:identifier];
+        cell = [[StoreCell alloc] initWithStyle:UITableViewStylePlain
+                            reuseIdentifier:identifier];
     
-    cell.userID = user.identifier;
-    cell.delegate = delegate;
     
     [cell resetUI];
     
-    [user downloadImage];
-    [cell setUserImage:user.image];
+    [store downloadImage];
+    [cell setStoreImage:store.image];
     
-
-    if(style == kUserPresenterStyleWithByline)
-        [cell setUserName:user.name
-               andMessage:user.byline];
-    else
-        [cell setUserName:user.name];
     
     return cell;
 }
 
 //----------------------------------------------------------------------------------------------------
-+ (CGFloat)heightForObject:(id)object 
++ (CGFloat)heightForObject:(id)object
      withPresentationStyle:(NSInteger)style {
     
-    return [UserCell heightForCell];
+    return [StoreCell heightForCell];
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -81,12 +73,12 @@
                     andUpdatedKey:(NSString*)updatedKey; {
     
     
-    User *user       = object;
-    UserCell *cell   = base;
+    Store *store       = object;
+    StoreCell *cell   = base;
     
-    if(user == updatedObject) {
+    if(store == updatedObject) {
         if([updatedKey isEqualToString:@"image"])
-            [cell setUserImage:user.image];
+            [cell setStoreImage:store.image];
     }
 }
 
@@ -95,18 +87,6 @@
                 withBaseCell:(id)base
        withPresentationStyle:(NSInteger)style
                 withDelegate:(id)delegate {
-    
-    
-    SEL sel = @selector(userCellSelected:);
-    
-    if(![delegate respondsToSelector:sel])
-        return;
-    
-    
-    User *user = object;
-    
-    [delegate performSelector:sel
-                   withObject:user];
     
 }
 

@@ -45,4 +45,7 @@ extern  NSString* const kNStoreImageLoaded;
 
 @property (nonatomic,strong) UIImage *image;
 
+
+- (void)downloadImage;
+
 @end
