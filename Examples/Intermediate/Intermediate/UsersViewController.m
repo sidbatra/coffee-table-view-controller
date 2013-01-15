@@ -84,7 +84,14 @@
 
 //----------------------------------------------------------------------------------------------------
 - (void)userCellFollowButtonClicked:(NSInteger)userID {
-    NSLog(@"Follow clicked for user id %d",userID);
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message"
+                                                    message:[NSString stringWithFormat:@"Follow clicked for user id %d",userID]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+
 }
 
 
