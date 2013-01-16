@@ -66,7 +66,7 @@
 
 //----------------------------------------------------------------------------------------------------
 - (void)loadDelayedUsers {
-    [self performSelector:@selector(loadUsers) withObject:nil afterDelay:1.5];
+    [self performSelector:@selector(loadUsers) withObject:nil afterDelay:2];
 }
 
 //----------------------------------------------------------------------------------------------------

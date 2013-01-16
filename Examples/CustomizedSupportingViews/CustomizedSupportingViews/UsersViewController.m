@@ -27,6 +27,7 @@
 #import "UsersViewDataSource.h"
 #import "UserPresenter.h"
 #import "User.h"
+#import "CustomLoadingView.h"
 
 @interface UsersViewController ()
 
@@ -74,6 +75,12 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1.0];
     
     [(UsersViewDataSource*)self.tableViewDataSource loadDelayedUsers];
+}
+
+//----------------------------------------------------------------------------------------------------
+- (UIView*)tableLoadingView {
+    CGRect frame = self.view.frame;
+    return [[CustomLoadingView alloc] initWithFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
 }
 
 
