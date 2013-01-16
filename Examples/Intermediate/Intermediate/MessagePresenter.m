@@ -74,6 +74,15 @@
                 withBaseCell:(id)base
        withPresentationStyle:(NSInteger)style
                 withDelegate:(id)delegate {
+    
+    
+    SEL sel = @selector(messageCellSelected);
+    
+    if(![delegate respondsToSelector:sel])
+        return;
+    
+    
+    [delegate performSelector:sel];
 }
 
 @end

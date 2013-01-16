@@ -377,14 +377,13 @@ static NSString* const kPresenterClassSuffix       = @"Presenter";
     
     id cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 
     [modelPresenter cellClickedForObject:object
                             withBaseCell:cell
                    withPresentationStyle:modelPresenterStyle
                             withDelegate:self];
-    
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

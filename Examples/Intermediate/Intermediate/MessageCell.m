@@ -26,7 +26,7 @@
 #import "MessageCell.h"
 
 @interface MessageCell() {
-    UILabel         *messageLabel;
+    UILabel  *messageLabel;
 }
 @end
 
@@ -46,7 +46,7 @@
 	
     if (self) {
         self.contentView.clipsToBounds = YES;
-		self.selectionStyle = UITableViewCellSelectionStyleNone;
+		self.selectionStyle = UITableViewCellSelectionStyleBlue;
         
         self.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         
@@ -64,6 +64,7 @@
     messageLabel.backgroundColor      = [UIColor clearColor];
     messageLabel.font                 = [UIFont fontWithName:@"HelveticaNeue" size:13];
     messageLabel.textColor            = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0];
+    messageLabel.highlightedTextColor = [UIColor whiteColor];
     messageLabel.textAlignment        = NSTextAlignmentCenter;
     
     [self.contentView addSubview:messageLabel];

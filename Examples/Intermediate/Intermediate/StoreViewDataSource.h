@@ -31,4 +31,6 @@
 - (void)loadData;
 - (void)loadDelayedData;
 
+- (void)addUser;
+
 @end
