@@ -1,4 +1,4 @@
-h1. Coffee Table View Controller
+h1. CoffeeTableViewController
 
 UITableViewController's current architecture leads to bloated and disorganized table view controllers because it becomes a hub for different types of code, including:
 * View controller logic
@@ -14,13 +14,13 @@ This added complexity makes it hard to manage table view controllers with:
 * Cells that vary across related table views (Users who like an item, users to follow, users in search results)
 
 
-Coffee Table View Controller is a modular, scalable and opinionated extension of UITableViewController. 
+CoffeeTableViewController is a modular, scalable and opinionated extension of UITableViewController. 
 
 
 
 h2. Concepts
 
-Coffee Table View Controller separates UITableViewController code into organized modules. 
+CoffeeTableViewController separates UITableViewController code into organized modules. 
 
 The data source contains an array of objects each of which is displayed as a table view row via a designated presenter. The table view controller defines this mapping between an object in the data source and a presenter. 
 
@@ -207,7 +207,7 @@ h4. Updating Presentation of Visible Cells
 
 h3. Extra
 
-The Examples folder contains the Intermediate project which shows how Coffee Table View Controller works with more complex table views. This is the table view it renders.
+The Examples folder contains the Intermediate project which shows how CoffeeTableViewController works with more complex table views. This is the table view it renders.
 
 !https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/intermediate.png!
 
@@ -253,5 +253,5 @@ That's it. The error and pull to refresh views can similarly be customized by vi
 
 h2. Credit
 
-Coffee Table View Controller is built by the wonderful people who make Mine: http://getmine.com
+CoffeeTableViewController is built by the wonderful people who make Mine: http://getmine.com
 
