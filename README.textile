@@ -37,7 +37,7 @@ h3. Presenter
 
 Classes that implement the presenter protocol contain code to initialize, present, update and handle interactions with table view cells. Presenters have an associaed style attribute which enables different presentations of the same table view cell by simply changing a parameter.
 
-Your custom model presenter classess must implement CModelPresenterProtocol.
+Your custom model presenter classes must implement CModelPresenterProtocol.
 
 
 h3. Table View Controller
