@@ -1,6 +1,6 @@
 h1. Coffee Table View Controller
 
-UITableViewController's current architecture results in bloated and disorganized table view controllers because it becomes a hub for different types of code, including:
+UITableViewController's current architecture leads to bloated and disorganized table view controllers because it becomes a hub for different types of code, including:
 * View controller logic
 * Initializing table view cells
 * Presenting table view cells
@@ -75,7 +75,7 @@ Most CTableViewDataSource methods contain a <code>sectionIndex</code> parameter 
 
 h3. UserPresenter
 
-The UserPresenter class implements CModelPresenterProtocol and wraps around the code to use UserCell for displaying users populated via UsersViewDataSource.
+The UserPresenter class implements CModelPresenterProtocol and wraps around the code to use UserCell for displaying users populated via UsersViewDataSource. The primary functions of the UserPresenter are:
 
 h4. Initialization and Presentation of UserCell
 
@@ -113,7 +113,7 @@ The presenation style parameter is defined by the UsersViewController along with
 
 h4. Update Presentation of UserCell
 
-The UsersViewController is responsible for view controller logic and can update the presentation of visible cells by passing them the updated object. For example, if a User image is downloaded the UsersViewController can update visible UserCells.
+The UsersViewController is responsible for view controller logic and can update the presentation of visible cells by passing them an updated object. For example, if a User image is downloaded the UsersViewController can update visible UserCells by:
 
 <pre>
   [self provideResourceToVisibleCells:user
@@ -167,7 +167,7 @@ The UsersViewController is automatically assigned as the delegate for all UserCe
 
 h3. UsersViewController
 
-The UsersViewController inherits from CTableViewController and primarily contains view logic.
+The UsersViewController inherits from CTableViewController and primarily contains view logic. The primary functions of the UsersViewController are:
 
 h4. Setting up UsersViewDataSource
 
@@ -207,7 +207,7 @@ h4. Updating Presentation of Visible Cells
 
 h3. Extra
 
-The Examples folder contains the Intermediate project which shows how Coffee Table View Controller works with more complex table views. It aims to render this table view:
+The Examples folder contains the Intermediate project which shows how Coffee Table View Controller works with more complex table views. This is the table view it renders.
 
 !https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/intermediate.png!
 
@@ -229,6 +229,9 @@ Add CoffeeTableViewController to your Xcode project:
 # Check the "Copy items into destination Group's folder" and select Recursively create groups for any added folders.
 
 !https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/setup.png!
+
+and you're done.
+
 
 h2. Customize
 
