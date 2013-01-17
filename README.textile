@@ -1,244 +1,221 @@
 h1. Coffee Table View Controller
 
-UITableViewController's current architecture results in bloated and disorganized table view controllers
-because it becomes a hub for different types of code, including:
+UITableViewController's current architecture results in bloated and disorganized table view controllers because it becomes a hub for different types of code, including:
 * View controller logic
-* Initialization of table view cells
-* Presentation of table view cells
+* Initializing table view cells
+* Presenting table view cells
 * Downloading images
-* Fetching or loading of data for table view cells
+* Fetching or loading data to populate table view cells
 
 This added complexity makes it hard to manage table view controllers with:
-* Lots of different types of cells 
-* Multiple data sources, possible from different services
+* Multiple different types of cells 
+* Multiple data sources, possibly from different services
 * Intricate cells that vary within a table view (Feed cells)
 * Cells that vary across related table views (Users who like an item, users to follow, users in search results)
 
 
-Coffee Table View Controller is a modular, scalable and DRY extension of UITableViewController. 
+Coffee Table View Controller is a modular, scalable and opinionated extension of UITableViewController. 
 
 
 
 h2. Concepts
 
-h3. CTableViewDataSource
+Coffee Table View Controller separates UITableViewController code into organized modules. 
 
-h3. CTableViewController
+The data source contains an array of objects each of which is displayed as a table view row via a designated presenter. The table view controller defines this mapping between an object in the data source and a presenter. 
 
-h3. CModelPresenter
+--Object heirarchy image--
 
-h3. Hooking Up
+h3. Data Source
+
+The data source contains code to fetch & populate the array of objects which represent the rows of the table view. Advanced table views with multiple sections are enabled via a two dimensional array. The data source communicates with the table view controller via a delegate.
+
+Your custom data sources must inherit from CTableViewDataSource.
 
 
+h3. Presenter
 
-h2. Installation
+Classes that implement the presenter protocol contain code to initialize, present, update and handle interactions with table view cells. Presenters have an associaed style attribute which enables different presentations of the same table view cell by simply changing a parameter.
+
+Your custom model presenter classess must implement CModelPresenterProtocol.
+
+
+h3. Table View Controller
+
+The table view controller contains an instance of the data source, view controller logic and a hash that maps data source objects to presenters.
+
+Your custom table view controllers must inherit from CTableViewController.
+
+
+h2. Example
+
+This section highlights the concepts discussed above via the Basic project found in the Examples folder. The aim is to render this simple table view of users:
+
+--Image of the basic example--
+
+h3. UsersViewDataSource
+
+The UsersViewDataSource inherits from CTableViewDataSource and it's sole aim is to populate an array of objects that represents rows in the table view.
+
+The <code>[self addObjects:users]</code> call populates this array of objects and <code>[self.delegate reloadTableView]</code> asks the table view to re-render.
 
 <pre>
-sudo gem install fifo
+- (void)loadUsers {
+ NSMutableArray *users = [NSMutableArray arrayWithCapacity:10];
+
+ //Populate users array - remotely or locally
+
+ [self addObjects:users];   
+
+ [self.delegate reloadTableView];
+}
+</pre>
+
+Most CTableViewDataSource methods contain a <code>sectionIndex</code> parameter that enables support for table views with multiple sections.
+
+h3. UserPresenter
+
+The UserPresenter class implements CModelPresenterProtocol and wraps around the code to use UserCell for displaying users populated via UsersViewDataSource.
+
+h4. Initialization and Presentation of UserCell
+
+The presenation style parameter is defined by the UsersViewController along with mapping of User objects to UserCell views.
+
+
+<pre>
++ (UITableViewCell*)cellForObject:(id)object
+                     withBaseCell:(id)base
+               withCellIdentifier:(NSString*)identifier
+                     withDelegate:(id)delegate
+             andPresentationStyle:(NSInteger)style {
+    
+    User *user = object;
+    UserCell *cell = base;
+      
+    //Initialization
+    if(!cell)
+        cell = [[UserCell alloc] initWithStyle:UITableViewStylePlain 
+                                 reuseIdentifier:identifier];
+    
+    // Presentation
+    [user downloadImage];
+    [cell setUserImage:user.image];
+    
+    if(style == kUserPresenterStyleWithByline)
+        [cell setUserName:user.name
+               andMessage:user.byline];
+    else
+        [cell setUserName:user.name];
+    
+    return cell;
+}
+</pre>
+
+h4. Update Presentation of UserCell
+
+The UsersViewController is responsible for view controller logic and can update the presentation of visible cells by passing them the updated object. For example, if a User image is downloaded the UsersViewController can update visible UserCells.
+
+<pre>
+  [self provideResourceToVisibleCells:user
+                           updatedKey:@"image"];
+</pre>
+
+The CTableViewController bundles the updated object with each of the visible cells and calls:
+
+<pre>
++ (void)updatePresentationForCell:(id)base
+                         ofObject:(id)object
+            withPresentationStyle:(NSInteger)style
+                withUpdatedObject:(id)updatedObject
+                    andUpdatedKey:(NSString*)updatedKey {
+    
+    User *user = object;
+    UserCell *cell = base;
+    
+    if(user == updatedObject) {
+        if([updatedKey isEqualToString:@"image"])
+            [cell setUserImage:user.image];
+    }
+}
+</pre>
+
+This facilitates a table view UI that responds immediately to changes in not only the object it represents but to any attribute of any object that the table view controller feels is relevant. 
+
+
+h4. Interactons with UserCell
+
+The UsersViewController is automatically assigned as the delegate for all UserCell interactions. The presenter acts as a facade to package and fire delegate events.
+
+<pre>
++ (void)cellClickedForObject:(id)object
+                withBaseCell:(id)base
+       withPresentationStyle:(NSInteger)style
+                withDelegate:(id)delegate {
+    
+    SEL sel = @selector(userCellSelected:);
+    
+    if(![delegate respondsToSelector:sel])
+        return;
+    
+    User *user = object;
+    
+    [delegate performSelector:sel
+                   withObject:user];
+}
 </pre>
 
 
-h2. Usage
+h3. UsersViewController
 
+The UsersViewController inherits from CTableViewController and primarily contains view logic.
 
-h3. Credentials
-
-Setup the aws access id and aws secret key. They can be found here: https://portal.aws.amazon.com/gp/aws/securityCredentials
+h4. Setting up UsersViewDataSource
 
 <pre>
-require 'fifo'
-FIFO::QueueManager.setup <aws_access_id>, <aws_secret_key>
+self.tableViewDataSource = [[UsersViewDataSource alloc] init];
+[(UsersViewDataSource*)self.tableViewDataSource loadUsers];
+</pre>
+
+h4. Mapping Objects to Presenters
+
+<pre>
+[self addModelPresenterForClass:[User class]
+                      withStyle:kUserPresenterStyleWithByline 
+                  withPresenter:[UserPresenter class]];
+</pre>
+
+Displaying the UserCell without a byline is as simple as replacing <code>kUserPresenterStyleWithByline</code> with <code>kModelPresenterDefaultStyle</code>
+
+
+h4. Handling UserCell Events
+
+<pre>
+- (void)userCellSelected:(User*)user {
+    NSLog(@"User clicked: %@",user.name);
+}
+</pre>
+
+h4. Updating Presentation of Visible Cells
+
+<pre>
+- (void)userImageLoaded:(NSNotification*)notification {
+    [self provideResourceToVisibleCells:notification.object
+                             updatedKey:@"image"];
+}
 </pre>
 
 
-h3. Initialization
+h3. Extra
 
-Create a queue object. If a queue by this name doesn't exist on the Amazon SQS account this will create one.
+The Examples folder contains the Intermediate project which shows how Coffee Table View Controller works with more complex table views. It aims to render this table view:
 
-For Rails, this can be added to a file in "config/initializers/".  Additionally, suffixes can be added to queue names for modularity. For example, adding "_staging" to queue names can segregate queues for the staging enviroment or adding machine IPs to queue names can create local queues.
-
-There is an additional parameter for message visibility. For more details see: http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/Welcome.html
-
-<pre>
-queue = FIFO::Queue.new <queue_name>
-</pre>
-
-To prevent delays at the start of the application SQS connections are opened lazily. This saves time when initialzing multiple queues:
-
-<pre>
-queues = []
-(1..10).each do |i|
-  queues << FIFO::Queue.new <queue_name_i>
-end
-</pre>
-
-h3. Insertion
-
-The most basic case takes a Ruby object, a method to be called and a list of method parameters. Example of a ruby command and how to run it in the background:
-
-<pre>
-"World".insert 0,"Hello "
-
-queue.push "World",:insert,0,"Hello "
-</pre>
+-- Intermediate example image--
 
 
-FIFO is designed to work with ActiveRecord objects. Freshness of ActiveRecord objects is ensured by reloading them from the database when they're popped from the queue. Consider an instance method to process images:
+h2. Setup
 
-<pre>
-user.process_profile_image {:max_width => 200,:max_height => 150}
-
-queue.push user,:process_profile_image,{:max_width => 200,:max_height => 150}
-</pre>
-
-
-FIFO also works with ActiveRecord class methods. For example, sending newsletters:
-
-<pre>
-UserMailer.deliver_newsletter emails
-
-queue.push UserMailer,:deliver_newsletter,emails
-</pre>
-
-
-h3. Processing
-
-Every item pushed into the queue is converted into a FIFO::Payload object which executes the passed method.
-
-Basic flow of processing an item from the queue:
-
-<pre>
-queue.push "Hello World",:length
-payload = queue.pop
-payload.process
-=> 11
-</pre>
-
-Retry functionality takes a failed payload and adds it back into the queue. Payload objects maintain total number of processing attempts.
-
-<pre>
-queue.push "Hello World",:length
-
-begin
-  payload = queue.pop
-  payload.process
-rescue => ex
-  payload.retry if payload.attempts < 3
-end
-</pre>
-
-
-Process all items in the queue:
-
-<pre>
-while(true)
-  payload = queue.pop
-  break unless payload
-  
-  begin
-    payload.process
-  rescue => ex
-    payload.retry if payload.attempts < 3
-  end
-end
-</pre>
-
-Multiple queues can be used to simulate priority:
-
-<pre>
-while(true)
-  payload = queue.pop
-  payload = queue1.pop unless payload
-  payload = queue2.pop unless payload
-  
-  begin
-    payload.process
-  rescue => ex
-    payload.retry if payload.attempts < 3
-  end
-
-  sleep 10
-end
-</pre>
-
-
-The Payload flow can be entirely skipped by popping the raw response from the queue:
-
-<pre>
-queue.pop :raw => true
-</pre>
-
-
-h4. Daemon
-
-h5. Installation
-
-<pre>
-sudo gem install daemons
-Install daemon_generator from: https://github.com/dougal/daemon_generator
-
-./script/generate daemon <name>
-</pre>
-
-h5. Source
-
-<pre>
-require File.dirname(__FILE__) + "/../../config/environment"
-
-$running = true
-Signal.trap("TERM") do 
-  $running = false
-end
-
-FIFO::QueueManager.setup <aws_access_id>, <aws_secret_key>
-
-queue = FIFO::Queue.new <queue_name> 
-logger = Logger.new(File.join(RAILS_ROOT,"log/<name>.rb.log"))
-
-
-while($running) do
-  payload = queue.pop
-
-  if payload
-
-    begin
-      start_time = Time.now
-      payload.process
-      end_time = Time.now
-
-      logger.info "Finished #{payload.to_s} #{end_time - start_time}"
-
-    rescue => ex
-      if payload.attempts < 3
-        logger.info "Recovering #{payload.to_s}"
-        payload.retry
-      else
-        #Log Exception
-      end
-    end
-
-  end 
-  
-  sleep 5
-end
-</pre>
-
-To control the state of the daemon:
-
-<pre>
-lib/daemon/<name>_ctl <start|stop|run>
-</pre>
-
-h2. SQS
-
-Things to know about Amazon's SQS:
-
-* The order of items isn't always maintained. It's not 100% fifo but close enough.
-* There are multiple connection modes to SQS: per_request, per_thread, single
-* http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/Welcome.html
-
+h2. Customize
 
 h2. Credit
 
 Coffee Table View Controller is built by the wonderful people who make Mine: http://getmine.com
-
