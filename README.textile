@@ -24,7 +24,7 @@ Coffee Table View Controller separates UITableViewController code into organized
 
 The data source contains an array of objects each of which is displayed as a table view row via a designated presenter. The table view controller defines this mapping between an object in the data source and a presenter. 
 
---Object heirarchy image--
+!https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/object-heirarchy.png!
 
 h3. Data Source
 
@@ -51,7 +51,7 @@ h2. Example
 
 This section highlights the concepts discussed above via the Basic project found in the Examples folder. The aim is to render this simple table view of users:
 
---Image of the basic example--
+!https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/basic.png!
 
 h3. UsersViewDataSource
 
@@ -209,13 +209,46 @@ h3. Extra
 
 The Examples folder contains the Intermediate project which shows how Coffee Table View Controller works with more complex table views. It aims to render this table view:
 
--- Intermediate example image--
+!https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/intermediate.png!
 
 
 h2. Setup
 
+Start by obtaining the source code, either by cloning the git repository:
+
+<pre>
+git clone https://github.com/sidbatra/coffee-table-view-controller.git
+</pre>
+
+or by downloading the latest "zip":https://github.com/sidbatra/coffee-table-view-controller/zipball/master or "tar":https://github.com/sidbatra/coffee-table-view-controller/tarball/master archive.
+
+
+Add CoffeeTableViewController to your Xcode project:
+
+# Drag and drop the CoffeeTableViewController folder into your project.
+# Check the "Copy items into destination Group's folder" and select Recursively create groups for any added folders.
+
+!https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/setup.png!
+
 h2. Customize
+
+CTableViewController comes with loading, error and pull to refresh views. These views plug into the table view controller and can easily be replaced with your own views.
+
+!https://raw.github.com/sidbatra/coffee-table-view-controller/master/Assets/supporting-views.png!
+
+The CustomizedSupportingViews project in the Examples folder shows how to create a custom loading view. Create a custom view that implements the <code>CLoadingViewProtocol</code> and place the following method in your table view controller.
+
+<pre>
+- (UIView*)tableLoadingView {
+    CGRect frame = self.view.frame;
+    return [[CustomLoadingView alloc] initWithFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
+}
+</pre>
+
+That's it. The error and pull to refresh views can similarly be customized by views that implement their specific protocols.
+
 
 h2. Credit
 
 Coffee Table View Controller is built by the wonderful people who make Mine: http://getmine.com
+
